@@ -1,0 +1,22 @@
+package video_package;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Channel {
+
+	public String id;
+	public String name; 
+	
+	private List<PlayList> playlists;
+	
+	public Channel(String id, String name){
+	   this.id=id;
+	   this.name=name; 
+	   
+	   playlists = new ArrayList<>();
+	}
+	
+	
+
+}

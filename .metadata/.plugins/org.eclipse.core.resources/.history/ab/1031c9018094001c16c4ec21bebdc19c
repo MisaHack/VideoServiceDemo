@@ -1,0 +1,79 @@
+package video_package;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PlayList {
+	
+	public String id;
+	public String name;
+	public User user;
+	
+	private List<Video> videos;
+	
+	public int orderNumber;
+
+	public PlayList(String id, String name, User user) {
+		this.id = id;
+		this.name = name;
+		this.user = user;
+		
+		videos = new ArrayList<>();
+		
+		orderNumber = 0;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public void addVideoToPlaylist(Video video){
+	   video.setOrderNumber(videos.size()+1);
+	   videos.add(video);	
+	}
+	
+	public List<Video> getListOfVideos(){
+	   return videos;
+	}
+	
+	public void removeVideoFromPlaylist(){
+		
+	}
+
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
+
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+}

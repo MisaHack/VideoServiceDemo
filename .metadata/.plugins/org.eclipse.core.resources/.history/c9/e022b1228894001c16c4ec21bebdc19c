@@ -1,0 +1,10 @@
+package com.springboot.videoservice.app.model;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="Video")
+public class Video {
+
+}

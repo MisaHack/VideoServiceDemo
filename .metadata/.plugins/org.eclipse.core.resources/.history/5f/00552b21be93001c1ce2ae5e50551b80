@@ -1,0 +1,12 @@
+package com.springboot.videoservice.app;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorldController {
+	
+   // method that returns Stream --> Hello World
+   public String printHelloWorld() {
+	  return "Hello World !"; 
+   }
+}

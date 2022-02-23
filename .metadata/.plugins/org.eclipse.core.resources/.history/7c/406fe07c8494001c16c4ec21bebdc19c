@@ -1,0 +1,16 @@
+package com.springboot.videoservice.app.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="User")
+public class User {
+   
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   public String id;
+}

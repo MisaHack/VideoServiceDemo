@@ -1,0 +1,13 @@
+package com.springboot.videoservice.app.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="Channel")
+public class Channel {
+
+}

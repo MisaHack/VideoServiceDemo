@@ -1,0 +1,7 @@
+#Propertie to change port
+server.port=8091
+
+#Propertie to add MySQL data
+spring.datasource.url=jdbc:mysql://localhost:3306/videoServiceDB?useSSL=false
+spring.datasource.username=root
+spring.datasource.password=1234

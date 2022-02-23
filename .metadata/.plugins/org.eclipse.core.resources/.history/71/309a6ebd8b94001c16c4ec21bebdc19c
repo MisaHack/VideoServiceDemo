@@ -1,0 +1,5 @@
+package com.springboot.videoservice.app.controller;
+
+public class ChannelController {
+
+}

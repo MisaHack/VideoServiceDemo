@@ -1,0 +1,2 @@
+com.javatpoint.stefan.App=org.springframework.stereotype.Component
+com.javatpoint.stefan.GreetingController=org.springframework.stereotype.Component

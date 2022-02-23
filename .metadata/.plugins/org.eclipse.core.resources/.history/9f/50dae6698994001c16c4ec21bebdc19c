@@ -1,0 +1,30 @@
+package com.springboot.videoservice.app.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="PlayList")
+public class PlayList {
+   
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   public String id;
+   
+   @Column(name = "name")
+   public String name;
+   
+   @Column(name = "user")
+   public User user;
+   
+   //fali VIDEOS
+   
+   
+}
