@@ -10,5 +10,4 @@ public class SpringBootVideoServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootVideoServiceApplication.class, args);
 	}
-
 }
