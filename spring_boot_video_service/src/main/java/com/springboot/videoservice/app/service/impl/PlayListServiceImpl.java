@@ -11,6 +11,10 @@ public class PlayListServiceImpl implements PlayListService{
 
 	private PlayListRepository playListRepository;
 	
+	public PlayListServiceImpl(){
+		
+	}
+	
 	public PlayListServiceImpl(PlayListRepository playListRepository) {
 		super();
 		this.playListRepository = playListRepository;

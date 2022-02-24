@@ -1,12 +1,16 @@
 package com.springboot.videoservice.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -23,9 +27,11 @@ public class ChannelModel {
    @Column(name="name")
    private String name;
    
-   //fali PLAYLISTS
-   
-   public String getId() {
+   //fali PLAYLISTS - dodao sam ga 
+   @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
+   Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
+      
+   public String getId(){
 	  return id;
    }
    

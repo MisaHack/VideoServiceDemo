@@ -8,6 +8,7 @@ import javax.persistence.MapsId;
 
 @Entity
 public class PlayListVideoModel {
+   
    @EmbeddedId
    private PlayListVideoId playListVideoId = new PlayListVideoId(); 
    

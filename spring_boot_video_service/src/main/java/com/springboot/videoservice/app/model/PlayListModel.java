@@ -34,6 +34,10 @@ public class PlayListModel {
    @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
    Collection <PlayListVideoModel> playListVideos = new ArrayList<>();
    
+   //ovo je konekcija za Channel na Playlistu
+   @OneToMany(mappedBy = "channelModel", cascade = CascadeType.ALL)   
+   Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
+   
    @Column(name = "orderNumber")
    public int orderNumber;
    
