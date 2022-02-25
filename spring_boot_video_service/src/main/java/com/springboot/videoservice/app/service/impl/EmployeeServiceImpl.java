@@ -1,5 +1,7 @@
 package com.springboot.videoservice.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservice.app.model.EmployeeModel;
@@ -22,5 +24,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public EmployeeModel saveEmployee(EmployeeModel employee) {
 	   return employeeRepository.save(employee);
+	}
+
+	@Override
+	public List<EmployeeModel> getAllEmployees() {
+		return employeeRepository.findAll();
 	}
 }

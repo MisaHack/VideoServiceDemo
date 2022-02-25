@@ -1,8 +1,11 @@
 package com.springboot.videoservice.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +16,7 @@ import com.springboot.videoservice.app.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api/employees")
-public class EmployeeController {
+public class EmployeeController { //Controller depends on Service layer
    
    @Autowired
    private EmployeeService employeeService;
@@ -23,7 +26,8 @@ public class EmployeeController {
 	  this.employeeService = employeeService;
    }
    
-   // build create Employee REST API
+   // build CREATE Employee REST API
+   
    // we are using ResponseEntity class as a return because we can provide
    // complete response details in this class 
    //(we can add status to to this class, header etc...)
@@ -37,4 +41,11 @@ public class EmployeeController {
    public ResponseEntity<EmployeeModel> saveEmployee(@RequestBody EmployeeModel employee){
 	  return new ResponseEntity<EmployeeModel>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
    }
+   
+   // build GET ALL Employees REST API, to return ALL Channel from DB
+   @GetMapping
+   public List<EmployeeModel> getAllEmployees(){
+	  return employeeService.getAllEmployees(); 
+   }
+   
 }

@@ -1,5 +1,7 @@
 package com.springboot.videoservice.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservice.app.model.VideoModel;
@@ -10,6 +12,10 @@ import com.springboot.videoservice.app.service.VideoService;
 public class VideoServiceImpl implements VideoService{
 
 	private VideoRepository videoRepository;
+	
+	public VideoServiceImpl() {
+		super();
+	}
 
 	public VideoServiceImpl(VideoRepository videoRepository) {
 		super();
@@ -21,5 +27,8 @@ public class VideoServiceImpl implements VideoService{
 		return videoRepository.save(video);
 	}
 
-	
+	@Override
+	public List<VideoModel> getAllVideos() {
+	   return videoRepository.findAll();
+	}
 }

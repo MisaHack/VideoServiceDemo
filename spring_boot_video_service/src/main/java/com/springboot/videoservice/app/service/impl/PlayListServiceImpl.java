@@ -1,5 +1,7 @@
 package com.springboot.videoservice.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservice.app.model.PlayListModel;
@@ -23,6 +25,11 @@ public class PlayListServiceImpl implements PlayListService{
 	@Override
 	public PlayListModel savePlayList(PlayListModel playList) {
 		return playListRepository.save(playList);
+	}
+
+	@Override
+	public List<PlayListModel> getAllPlayLists() {
+	   return playListRepository.findAll();
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.springboot.videoservice.app.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservice.app.model.ChannelModel;
@@ -22,6 +24,11 @@ public class ChannelServiceImpl implements ChannelService{
 	@Override
 	public ChannelModel saveChannel(ChannelModel channel) {
 	   return channelRepository.save(channel);
+	}
+
+	@Override
+	public List<ChannelModel> getAllChannels() {
+	   return channelRepository.findAll();
 	}
 
 }
