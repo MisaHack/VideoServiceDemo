@@ -1,9 +1,11 @@
 package com.springboot.videoservice.app.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservice.app.exception.ResourceNotFoundException;
 import com.springboot.videoservice.app.model.ChannelPlayListModel;
 import com.springboot.videoservice.app.repository.ChannelPlayListRepository;
 import com.springboot.videoservice.app.service.ChannelPlayListService;
@@ -32,6 +34,18 @@ public class ChannelPlayListServiceImpl implements ChannelPlayListService {
 	@Override
 	public List<ChannelPlayListModel> getAllChannelPlayLists() {
 		return channelPlayListRepository.findAll();
+	}
+
+	@Override
+	public ChannelPlayListModel getChannelPlayListById(long id) {
+	   Optional<ChannelPlayListModel> channelPlayList = channelPlayListRepository.findById(id);
+	   
+	   if(channelPlayList.isPresent()){
+		  return channelPlayList.get(); 
+	   }
+	   else{
+		  throw new ResourceNotFoundException("ChannelPlayList", "id", id); 
+	   }
 	}
 
 }

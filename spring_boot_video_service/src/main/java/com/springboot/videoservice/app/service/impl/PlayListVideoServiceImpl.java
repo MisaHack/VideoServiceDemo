@@ -1,9 +1,11 @@
 package com.springboot.videoservice.app.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservice.app.exception.ResourceNotFoundException;
 import com.springboot.videoservice.app.model.PlayListVideoModel;
 import com.springboot.videoservice.app.repository.PlayListVideoRepository;
 import com.springboot.videoservice.app.service.PlayListVideoService;
@@ -29,5 +31,17 @@ public class PlayListVideoServiceImpl implements PlayListVideoService {
 	@Override
 	public List<PlayListVideoModel> getAllPlayListVideos() {
 	   return playListVideoRepository.findAll();
+	}
+
+	@Override
+	public PlayListVideoModel getPlayListVideoById(long id) {
+	   Optional<PlayListVideoModel> playListVideo = playListVideoRepository.findById(id);
+	   
+	   if(playListVideo.isPresent()){
+		  return playListVideo.get(); 
+	   }
+	   else{
+		  throw new ResourceNotFoundException("PlayListVideo","id",id);  
+	   }
 	}
 }

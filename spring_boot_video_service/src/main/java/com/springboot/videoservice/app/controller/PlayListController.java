@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,17 @@ public class PlayListController { //Controller depends on Service layer
 		
 	}
 	
-	// build GET ALL PlayLists REST API, to return ALL Channel from DB
+	// build GET ALL PlayLists REST API, to return ALL PlayLists from DB
     @GetMapping
     public List<PlayListModel> getAllPlayLists(){
        return playlistService.getAllPlayLists();	
+    }
+    
+    // build GET PlayList BY ID REST API, to return PlayList BY ID from DB
+    // http://localhost:8080/api/playlist/1
+    // this is dynamic path variable    
+    @GetMapping("{id}")
+    public ResponseEntity<PlayListModel> getPlayListById(@PathVariable("id") long playList_id){
+       return new ResponseEntity<PlayListModel>(playlistService.getPlayListById(playList_id), HttpStatus.OK);
     }
 }

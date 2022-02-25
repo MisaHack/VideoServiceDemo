@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,10 +43,19 @@ public class EmployeeController { //Controller depends on Service layer
 	  return new ResponseEntity<EmployeeModel>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
    }
    
-   // build GET ALL Employees REST API, to return ALL Channel from DB
+   // build GET ALL Employees REST API, to return ALL Employees from DB
    @GetMapping
    public List<EmployeeModel> getAllEmployees(){
 	  return employeeService.getAllEmployees(); 
    }
+   
+   // build GET Employee BY ID REST API, to return Employee BY ID from DB
+   // http://localhost:8080/api/employees/1
+   // this is dynamic path variable
+   @GetMapping("{id}")
+   public ResponseEntity<EmployeeModel> getEmployeeById(@PathVariable("id") long employee_id){
+	  return new ResponseEntity<EmployeeModel>(employeeService.getEmployeeById(employee_id), HttpStatus.OK);
+   }
+   
    
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +33,17 @@ public class UserController { //Controller depends on Service layer
 	   return new ResponseEntity<UserModel>(userService.saveUser(userModel), HttpStatus.CREATED);	
 	}
 	
-	 // build GET ALL Users REST API, to return ALL Channel from DB
+	 // build GET ALL Users REST API, to return ALL Users from DB
 	@GetMapping
 	public List<UserModel> getAllUsers(){
 	   return userService.getAllUsers();	
+	}
+	
+	// build GET User BY ID REST API, to return User BY ID from DB
+	// http://localhost:8080/api/user/1
+	// this is dynamic path variable
+	@GetMapping("{id}")
+	public ResponseEntity<UserModel> getUserById(@PathVariable("id") long user_id){
+	   return new ResponseEntity<UserModel>(userService.getUserById(user_id), HttpStatus.OK);	
 	}
 }

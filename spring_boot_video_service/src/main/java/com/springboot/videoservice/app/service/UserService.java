@@ -7,4 +7,5 @@ import com.springboot.videoservice.app.model.UserModel;
 public interface UserService {
    UserModel saveUser(UserModel user);
    List<UserModel> getAllUsers();
+   UserModel getUserById(long id);
 }

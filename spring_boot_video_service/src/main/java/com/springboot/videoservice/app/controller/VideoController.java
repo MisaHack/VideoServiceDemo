@@ -32,7 +32,7 @@ public class VideoController { //Controller depends on Service layer
 	   return new ResponseEntity<VideoModel>(videoService.saveVideo(video), HttpStatus.CREATED);	
 	}
 	
-	// build GET ALL Videos REST API, to return ALL Channel from DB
+	// build GET ALL Videos REST API, to return ALL Videos from DB
 	@GetMapping
 	public List<VideoModel> getAllVideos(){
 	   return videoService.getAllVideos();
