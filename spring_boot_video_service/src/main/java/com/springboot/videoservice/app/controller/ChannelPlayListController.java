@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,14 @@ public class ChannelPlayListController { //Controller depends on Service layer
 	@GetMapping("{id}")
 	public ResponseEntity<ChannelPlayListModel> getChannelPlayListById(@PathVariable("id") long channelPlayList_id){
        return new ResponseEntity<ChannelPlayListModel>(channelPlayListService.getChannelPlayListById(channelPlayList_id), HttpStatus.OK);		
+	}
+	
+	// build UPDATE ChannelPlayList Data REST API, to Update ChannelPlayList Data fields from DB
+	// http://localhost:8080/api/channelPlayList/1
+	// we use ResponseEntity as a return type	
+	@PutMapping("{id}")
+	public ResponseEntity<ChannelPlayListModel> updateChannelPlayList(@PathVariable("id") long id, @RequestBody ChannelPlayListModel channelPlayList){
+	   return new ResponseEntity<ChannelPlayListModel>(channelPlayListService.updateChannelList(channelPlayList, id), HttpStatus.OK);
 	}
 	
 }

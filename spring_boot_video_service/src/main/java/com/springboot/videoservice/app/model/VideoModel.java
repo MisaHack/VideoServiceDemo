@@ -22,7 +22,7 @@ public class VideoModel {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   public String id;
+   public long id;
    
    @Column(name="name")
    public String name;
@@ -34,7 +34,7 @@ public class VideoModel {
    @OneToMany(mappedBy = "videoModel", cascade = CascadeType.ALL)
    Collection<PlayListVideoModel> playListVideo = new ArrayList<>();
    
-   public String getId() {
+   public long getId() {
 	  return id;
    }
    

@@ -48,4 +48,19 @@ public class ChannelPlayListServiceImpl implements ChannelPlayListService {
 	   }
 	}
 
+	@Override
+	public ChannelPlayListModel updateChannelPlayList(ChannelPlayListModel channel, long id) {
+		
+       //we need to check does ChannelPlaylist with given id exist in DB or not
+	   ChannelPlayListModel existingChannelPlaylist = channelPlayListRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ChannelPlayList", "id", id));
+	   
+	   existingChannelPlaylist.setChannelModel(channel.getChannelModel());
+	   existingChannelPlaylist.setPlayListModel(channel.getPlayListModel());
+	   
+	   //save existing ChannelPlayList to DB
+	   channelPlayListRepository.save(existingChannelPlaylist);
+	   return existingChannelPlaylist;
+	   
+	}
+
 }

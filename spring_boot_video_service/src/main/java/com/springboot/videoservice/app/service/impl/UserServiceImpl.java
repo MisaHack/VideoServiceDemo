@@ -7,7 +7,9 @@ import com.springboot.videoservice.app.exception.ResourceNotFoundException;
 import com.springboot.videoservice.app.model.UserModel;
 import com.springboot.videoservice.app.repository.UserRepository;
 import com.springboot.videoservice.app.service.UserService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;

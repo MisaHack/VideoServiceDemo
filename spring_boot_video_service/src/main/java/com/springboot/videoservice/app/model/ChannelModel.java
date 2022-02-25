@@ -22,7 +22,7 @@ public class ChannelModel {
    
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   public String id;
+   public long id;
    
    @Column(name="name")
    private String name;
@@ -31,7 +31,7 @@ public class ChannelModel {
    @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
    Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
       
-   public String getId(){
+   public long getId(){
 	  return id;
    }
    

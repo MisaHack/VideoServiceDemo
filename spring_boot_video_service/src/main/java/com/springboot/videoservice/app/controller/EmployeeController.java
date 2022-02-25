@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,14 @@ public class EmployeeController { //Controller depends on Service layer
    @GetMapping("{id}")
    public ResponseEntity<EmployeeModel> getEmployeeById(@PathVariable("id") long employee_id){
 	  return new ResponseEntity<EmployeeModel>(employeeService.getEmployeeById(employee_id), HttpStatus.OK);
+   }
+   
+   // build UPDATE Employee Data REST API, to Update Employee Data fields from DB
+   // http://localhost:8080/api/employees/1
+   // we use ResponseEntity as a return type
+   @PutMapping("{id}")
+   public ResponseEntity<EmployeeModel> updateEmployee(@PathVariable("id") long id, @RequestBody EmployeeModel employee){
+	  return new ResponseEntity<EmployeeModel>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
    }
    
    

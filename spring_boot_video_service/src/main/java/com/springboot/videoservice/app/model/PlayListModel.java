@@ -22,13 +22,13 @@ public class PlayListModel {
    
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   public String id;
+   public long id;
    
    @Column(name = "name")
    public String name;
    
-   @Column(name = "user")
-   public UserModel user;
+   /*@Column(name = "user")
+   public UserModel user;*/
    
    //fali VIDEOS - dodat je na ovaj nacin
    @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
@@ -41,7 +41,7 @@ public class PlayListModel {
    @Column(name = "orderNumber")
    public int orderNumber;
    
-   public String getId() {
+   public long getId() {
 	  return id;
    }
    

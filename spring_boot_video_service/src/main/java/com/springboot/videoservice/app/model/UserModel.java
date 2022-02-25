@@ -18,12 +18,12 @@ public class UserModel {
    
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   public String id;
+   public long id;
    
    @Column(name="name")
    private String name;
    
-   public String getId() {
+   public long getId() {
 	  return id;
    }
    
