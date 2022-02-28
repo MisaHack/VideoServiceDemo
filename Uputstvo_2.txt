@@ -1,0 +1,268 @@
+Pozdrav,
+danas sam u guzvi, pa cemo preskociti sastanak u 14h.
+---------------------------------------------------------
+Pozdrav,
+aplikacija ne treba da ima GUI.
+Nije potrebno skidati video sa youtube, to je opis hipotetičke aplikacije, za koju u okviru zadataka treba napisati samo servis klasu koja treba da ima funkcionalnost navedenu u zadatku.
+U zadatku su zadate klase User, Video i Playlist i treba definisti odnos Video i Playlist klasa (video može biti u više playlista i svaka playlista može imati proizvoljan broj videa). 
+Ukoliko je potrebno može se funkcionalnost obraditi kroz više klasa.
+
+Nije potrebno koristiti nikakav framework u okviru zadatka.
+
+---------------------------------------------------------
+Pozdrav, 
+još malo pojašnjenja
+
+1. lista videa u okrviru playliste treba da bude sortirana prema rednom broju videa u okviru playliste - redni broj treba da bude property za video u okviru playliste. Treba dodati klasu koja će referencirati video u playlisti i sadržati redni broj.
+2. dodavanje se vrši na kraj liste
+3. video se uklanja sa mesta na kom se nalazi, kada se jedan video ukloni treba prenumerisati svaki video u okviru playliste ukoliko je potrebno
+---------------------------------------------------------
+Pozdrav,
+mozes napraviti inicijalnu listu videa sa proizvoljnim brojem videa, deo oko dodavanja videa i skidanje nije u opsegu zadatka. 
+Korisnik moze kreirati proizvoljan broj lista sa razlicitim brojem videa. Jedan video se moze pojaviti u bilo kojoj listi (od bilo kog korisnika).
+Korisnik ne treba da se loguje (pretpostavi da se loguje na drugom mestu).
+Korisnik moze da izlista svoje playliste i da manipulise redosledom videa u okviru list i da dodaje i uklanja videe iz liste.
+
+---------------------------------------------------------
+ukoliko neko promeni broj videa sa mesta 11 na mesto 2, potrebno je re-numerisati listu videa.
+---------------------------------------------------------
+korisnik uvek treba da dobije sotriranu listu.
+---------------------------------------------------------
+
+Prvi zadatak ce biti da se napravi spring boot backend aplikacija za zadatak koji ste imali. 
+
+
+Potrebno je dodati jos i klasu Channel koja predstavlja video kanal. 
+
+Jedan kanal moze imati vise playlist - a, i takodje playliste u okviru kanala imaju redne brojeve koji se takodje mogu menjati.
+
+
+Za video i playlistu takodje treba dodati i kategorije koje se mogu dodavati i uklanjati.
+---------------------------------------------------------
+
+kategorija je poseban entitet koji se moze dodavati i menjati, jedan video ili playlista moze imati vise kategorija
+
+tako je : film koji je u isto vreme i KOMEDIJA i TRILER.
+---------------------------------------------------------
+
+Spring Boot BEZ log-in i Security radimo
+slojevi : hendler, servis, DAO
+hendler ne mora da zna da postoji DAO lajer
+trebaju nam hendleri za sve
+krecemo od modela prema gore
+koristicemo JPA repository interfejs
+ne kodira se nista sto se tice repositorija
+Spring Boot pravi proxy klase za interfejse
+servisni nivo : razdvajanje interfejsa i implementacije
+H2 baza u memoriji, pa cemo objasniti kako da imamo informacije u bazi popunjene, in-memory database
+Napraviti entity objekte, auto increment, prema tipu baze sam odredjuje
+Za svaki Entity postoje Equals i HashCode, proveravamo da li postoji neki objekat u kolekciji sa njim
+Kod dodavanja ako ne dodamo Equals i HashCode, dodace samo jedan element, kada radimo sa domenskim objektima, 
+kada god radimo sa Kolekcijama
+
+Rest API aplikacija, sa 4-5 objekata, Channel, PlayList, Video, isto objekti koje snimamo zbog redosleda
+Kod oduzimanja obratiti paznju na sortiranje
+
+Posle cemo Security layer dodati
+
+Sutra cemo proci Unit testove
+
+Kod H2 su nezgodni integration testovi
+
+Napraviti infrastrukturu - napraviti repository za te objekte, osnovna strukture 
+
+U osnovnom paketu ce biti SpringBoot aplikacija
+
+strukture - config paket, repository, domen za domenske objekte, servis i 
+
+Zasada vracamo objekte kao sto jesu
+
+TDD (test driven development) - prvo pisemo test pa kod
+
+Test : inicijalizacija, when(user.service) create user, 2. korak - na osnovu parametara 
+
+TDD omogucava, ako menjamo drugi deo sistema ovo prethodno napisano nije ugrozeno
+
+Za svaki objekat treba CRUD odraditi
+
+-----------------------------------------------------
+
+Video-Category many-to-many veza
+dovoljan je Lonbok za pocetak, on koristi anotacije u javi, @Data - kreirace getere i setere, no-args konstruktor dodati,
+za Hybernate trazi drugacije
+Problem sa Equals i Hashcode kada se koristi Lonbok, moze da bude problematicno kod poziva .toString()
+Kada se koristi SpringBoot, ne bi trebalo koristi Lonbok, bolje je Equals i HashCode, rucno napisan kod ima prioritet u odnosu na Lonbok
+Equals - samo prosta polja : boolean, int
+
+----------------------------------------------
+
+U app paket ide samo glavna aplikacija/glavni program, u nasem slucaju - PlaylistVideoService
+U Master branch samo ono sto je istestirano ide
+
+1. linija da li je isti objekat
+2. da li je instanca klase Video
+3. poredi polje po polje klase
+
+cesto je dovoljan ID, ALI ukoliko dodajemo Video pre nego sto je snimljen to moze biti problem jer ID ne postoji, NULL je kod svih, onda poredimo druga neka polja da resimo taj problem,
+instancira se polje UUID, ali i tu je problem on se ne snima !!!
+
+PlayListVideo - spajajuca tabela za PlayList i Video
+
+@OneToMany(fetch = FetchType.LAZY)
+kada god pozovemo getPlayListVideos() presrece 
+EAGER - kada se ucita video ucitava se i lista objekata, oprezno koristiti
+CASCADE - u video servisu ako kazemo da je remote, znaci da ce nam obrisati taj objekat, znaci oni koji nemaju veze sa originalnim objektom
+
+@OneToMany(fetch = FetchType.LAZY, mappedBy = 'video', cascade = CascadeType.ALL, orphanRemoval = true)
+
+NIKADA NE VRACATI 'NULL' vrednost iz funkcija ! ako ne vraca nista, bolje vratiti praznu listu ! Tesko se otkriva greska inace !!
+
+DEFENSIVE PROGRAMING - svuda proveravamo da li su elementi inicijalizovani u slucaju da nastavljamo tudj kod !
+
+public void addVideo(PlaylistVideo playlistVideo){
+   //za poredjenje primitivnih objekata
+   if(playlistVideo == null){
+      playlistVideo = new ArrayList<>();
+   }
+   
+   //ako je Equals i Hashcode dobro napisan, ovo ce raditi ! 
+   playlistVideo.remove(playlistVideo);
+    
+}
+
+@Service  @Repository
+Service, Repositori i - su komponente
+
+@RequiredArgsConstructor - on oznacava sva polja koja su final i pravi konstruktor u pozadini za njih
+
+Longbok = smanjuje boilerplate kod i povecava citljivost
+
+za vece projekte ide PlaylistVideoImpl implements PlaylistVideoService, dakle poziva se interfejs i u implementaciji ce se raditi konkretna implementacija
+
+@RestController
+@RequiredArgsContstructor
+class PlaylistController 
+@GetMapping 
+ako trebamo da vratimo bez rezultata (NULL) onda vracamo LISTU !!!
+
+@Service
+@RequiredArgsConstructor
+class VideoService
+private final VideoRepository videoRepository;
+public List<Video> listVideos(){return videoRepository.findAll()}
+public Optional<Video> getVideo(String videoId){return videoRepository.findById(video)}
+
+
+slojevi : konroler, servis, ...
+
+iz kontrolera ne pozivati ...
+
+u video kontroleru zato nikada necemo imati slucaj bez VideoServisa, da bi lepo bilo odvojeno
+
+dobra praksa je da REST kontroller URL pocinje sa /API/ jer je to vidljivo Userima (administratorima),
+i prema putanjama moze se Security podesiti
+
+OPEN CLOSED PRINCIP KORISTITI OD STARTA - razdvajati po slojevima zbog kompleksnosti projekta i nadogradnje istog
+
+kod @ManyToMany dolazi do stackoverflow zbog rekurzije pa ispisuje listu listi, resenje je sa @SuppresJSon, ALI 
+kada se koristi Jackson, on ce do dubine 3 pokusati da izvrsi transformaciju objekta
+krajnjeg korisnika ne interesuje sve to, vec samo ID i NAME u VIDEO
+
+
+radi lakse transformacije mogu se dodatne metode napisati u VIDEO MODELU ili DTO Objektu (ako ne zelimo da brljamo po Entity objektima)
+
+public List<Video> getVideos(){
+   if(playlistVideos != null){
+      return playlistVideos.stream().sorted(Comparator.comparing(PlaylistVideo::getOrderNo)).map(PlayListVideo::getVideo).collect(Collectors.toList())
+   }
+   else{
+      return new ArrayList<>();
+   }
+}
+
+
+promenuti ID da bude LONG u Entitetima a NE INT ili STRING !
+
+promenuti Nazive Model klasa da budu sa sufiksom MODEL !
+
+@EmbeddabledId
+
+---------------------------------------------------
+
+Svi objekti u bazi mogu biti povezani i podrazumevana je Jackson za mapiranje
+Da bi bilo manje klasa vidljivih, nekada valja praviti inner klase
+@EqualsAndHashCode(of = {"videoOrderId"})
+potrebno je razdvojiti Biznis(logicku) gresku od ...
+obratiti paznju na dupliranje koda, nepotreban kod i slicno
+BuilderPattern se valja koristiti, u addPlaylistToChannel za polja setChannel, setPlaylist, setPosition, koji se stavlja u PlayListChannel tabelu
+
+playlistOrderServiceImplementation - implementacija funkcionalnosti za promenu redosleda koju smo nekada pisali, na kraju ide taj UPDATE iz CRUDa, i kada je tako velika funkcionalnost koju je tesko pratiti treba napisati Test
+
+U servisno implemetacionom sloju je dozvoljeno mesanje servisnih i....
+
+U kontorleru kod Delete i Update moze da bude samo VOID, da ne vraca nista
+
+metode koje su proste i jednodimenzionalne nisu kandidati za testiranje
+
+---------------------------------------------------
+
+Umesto @ManyToMany treba koristiti poveznicku tabelu
+Tabela treba da bude singlton naziva - ne Users nego User, dakle jednina
+
+DTO nam sluzi da smanjimo kolicinu podataka koje saljemo klijentu sa servera
+kontroler radi sa DTO objektima a servisu salje obicne objekte
+
+za Kategoriju je dovoljno:
+
+@Data
+public class CategoryDto{
+
+private long id;
+private String name;
+private long numberOfVideo;
+private Long numberOfPlayLists;
+
+public CategoryDto(Category category){
+   this.id=category.getId();
+this.name=category.getName();
+this.numberOfVideos = category.getVideo() != null
+}
+
+}
+
+biblioteka za pisanje interfejsa, sama trazi polja koja su slicna i mapira ih sa jednog
+objekta na drugi --- MapStruct
+
+@Mapper - anotacija
+
+toDTO i fromDTO bitno skracuje pisanje mapera, i treba ga koristiti ako znamo kako
+
+samo u kontroleru se koriste DTO objekti (retko se spustaju u servisni nivo)
+ne bi trebale data transformacije da se spustaju u servisni sloj
+standard i preporuka je da >>kontroler<< sluzi za validaciju ulaznih parametara (ima framework za to), pozivanje servisne funkcije i za trasformaciju
+>>servisni nivo<< = dohvatanje podataka, snimanje-slanje podataka, validacije koje nisu proste se isto ovde desavaju
+postojace vise vrsta servisa pa ce postojati i vise paketa za njih, da ih lepo razdvajamo po funkciji
+
+za 90% stvari nam je dovoljan Repository interfejs, za 10% je ipak potrebno koristiti nesto komplikovanije
+
+paketi u javi se koriste da se slicne stvari grupisu
+
+sto se tice logovanja - da li program funkcionise dobro, da analiziramo - za logovanje se koristi podrazumevana implementacija : SL4J (SQL 4 J)
+ima dosta tih logera, svi slicno rade, za pocetak je dovoljno izvrsenje u konzoli
+
+sve SQL upite i parametre koji su predati treba logovati
+
+ako koristimo Lonbok potrebno je dodati samo @SL4J
+
+kreiranje Stringa je skupo (lakse je porediti INT-ove nego Stringove zato sto bi se poredio znak po znak)
+
+vise nivoa logovajna : trace, debug, info, warn, error, fatal
+
+npr : log.debug(.....)
+
+logovanje za manipulaciju treba logovati, da se vidi kako se nesto izvrsavalo
+
+
+Sto se tice mapera - Model Maper - on pokusava da proceni sam sta hocemo da mapiramo, u nekom fajlu se definisu pravila kako se sta na sta mapira
+
+private final org.modelmaper.modelmapper modelMapper;
