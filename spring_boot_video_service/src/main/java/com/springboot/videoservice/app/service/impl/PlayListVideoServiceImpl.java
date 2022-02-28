@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservice.app.exception.ResourceNotFoundException;
+import com.springboot.videoservice.app.model.PlayListModel;
 import com.springboot.videoservice.app.model.PlayListVideoModel;
 import com.springboot.videoservice.app.repository.PlayListVideoRepository;
 import com.springboot.videoservice.app.service.PlayListVideoService;
@@ -43,5 +44,30 @@ public class PlayListVideoServiceImpl implements PlayListVideoService {
 	   else{
 		  throw new ResourceNotFoundException("PlayListVideo","id",id);  
 	   }
+	}
+
+	@Override
+	public PlayListVideoModel updatePlayListVideo(PlayListVideoModel playListVideo, long id) {
+	   
+       //we need to check does PlayList with the given id exist in DB or not
+		PlayListVideoModel existingPlayListVideo = playListVideoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayListVideo", "id", id));
+		
+		existingPlayListVideo.setPlayListModel(playListVideo.getPlayListModel());
+		
+		existingPlayListVideo.setVideoModel(playListVideo.getVideoModel());
+		
+		//save existing Play List to DB
+		playListVideoRepository.save(existingPlayListVideo);
+		return existingPlayListVideo;
+	}
+
+	@Override
+	public void deletePlayListVideo(long id) {
+	   
+	   // check whether a Play List exist in DB or not
+	   playListVideoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayListVideo", "id", id));
+	   
+	   playListVideoRepository.deleteById(id);
+		
 	}
 }

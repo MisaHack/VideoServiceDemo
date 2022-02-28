@@ -46,4 +46,29 @@ public class PlayListServiceImpl implements PlayListService{
 	   }
 	}
 
+	@Override
+	public PlayListModel updatePlayList(PlayListModel playList, long id) {
+	   
+	   //we need to check does PlayList with the given id exist in DB or not
+	   PlayListModel existingPlayList = playListRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", id));
+
+	   existingPlayList.setId(playList.getId());
+	   existingPlayList.setName(playList.getName());
+	   existingPlayList.setChannelPlayLists(playList.getChannelPlayLists());
+	   existingPlayList.setOrderNumber(playList.getOrderNumber());
+	   existingPlayList.setCategory(playList.getCategory());
+	   
+	   //save existing Play List to DB
+	   playListRepository.save(existingPlayList);
+	   return existingPlayList;
+	}
+
+	@Override
+	public void deletePlayList(long id) {
+	   // check whether a PlayList exist in DB or not
+	   playListRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", id));
+	   
+	   playListRepository.deleteById(id);
+	}
+
 }

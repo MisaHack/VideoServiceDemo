@@ -9,4 +9,6 @@ public interface PlayListVideoService {
    PlayListVideoModel savePlayListVideo(PlayListVideoModel playListVideo);
    List<PlayListVideoModel> getAllPlayListVideos();
    PlayListVideoModel getPlayListVideoById(long id);
+   PlayListVideoModel updatePlayListVideo(PlayListVideoModel playListVideo, long id);
+   void deletePlayListVideo(long id);
 }

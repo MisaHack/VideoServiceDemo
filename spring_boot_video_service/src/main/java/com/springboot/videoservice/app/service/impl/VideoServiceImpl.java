@@ -47,4 +47,30 @@ public class VideoServiceImpl implements VideoService{
 		  throw new ResourceNotFoundException("Video", "id", id); 
 	   }
 	}
+
+	@Override
+	public VideoModel updateVideo(VideoModel video, long id) {
+	   
+		//we need to check does Video with the given id exist in DB or not
+		VideoModel existingVideo = videoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Video", "id", id));
+		
+		existingVideo.setName(video.getName());
+		existingVideo.setOrderNumber(video.getOrderNumber());
+		existingVideo.setPlayListVideo(video.getPlayListVideo());
+		existingVideo.setCategory(video.getCategory());
+		
+		//save existing Video to DB
+		videoRepository.save(existingVideo);
+		return existingVideo;
+	}
+
+	@Override
+	public void deleteVideo(long id) {
+	
+	   // check whether a Video exist in DB or not
+	   videoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Video", "id", id));
+	   
+	   videoRepository.deleteById(id);
+		
+	}
 }

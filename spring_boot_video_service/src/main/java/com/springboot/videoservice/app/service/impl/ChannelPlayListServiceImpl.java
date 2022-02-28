@@ -63,4 +63,13 @@ public class ChannelPlayListServiceImpl implements ChannelPlayListService {
 	   
 	}
 
+	@Override
+	public void deleteChannelPlayList(long id) {
+	
+	   // check whether a ChannelPlayList exist in DB or not 
+	   channelPlayListRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ChannelPlayList", "id", id));
+	   
+	   channelPlayListRepository.deleteById(id);
+	}
+
 }

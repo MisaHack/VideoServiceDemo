@@ -8,4 +8,6 @@ public interface UserService {
    UserModel saveUser(UserModel user);
    List<UserModel> getAllUsers();
    UserModel getUserById(long id);
+   UserModel updateUser(UserModel user, long id);
+   void deleteUser(long id);
 }

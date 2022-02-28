@@ -8,4 +8,6 @@ public interface ChannelService {
    ChannelModel saveChannel(ChannelModel channel);
    List<ChannelModel> getAllChannels();
    ChannelModel getChannelById(long id);
+   ChannelModel updateChannel(ChannelModel channel, long id);
+   void deleteChannel(long id);
 }

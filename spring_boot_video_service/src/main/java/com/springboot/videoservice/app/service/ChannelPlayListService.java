@@ -9,4 +9,5 @@ public interface ChannelPlayListService {
    List<ChannelPlayListModel> getAllChannelPlayLists();
    ChannelPlayListModel getChannelPlayListById(long id);
    ChannelPlayListModel updateChannelPlayList(ChannelPlayListModel channel, long id);
+   void deleteChannelPlayList(long id);
 }

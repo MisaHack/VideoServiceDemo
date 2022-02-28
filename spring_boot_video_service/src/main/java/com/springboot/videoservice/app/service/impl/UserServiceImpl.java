@@ -45,4 +45,26 @@ public class UserServiceImpl implements UserService {
 	   }
 	}
 
+	@Override
+	public UserModel updateUser(UserModel user, long id) {
+	   
+		//we need to check does User with the given id exist in DB or not
+		UserModel existingUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+		
+		existingUser.setName(user.getName());
+		
+		//save existing User to DB
+		userRepository.save(existingUser);
+		return existingUser;
+	}
+
+	@Override
+	public void deleteUser(long id) {
+		
+	   // check whether a User exist in DB or not
+	   userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+	   
+	   userRepository.deleteById(id);
+	}
+
 }

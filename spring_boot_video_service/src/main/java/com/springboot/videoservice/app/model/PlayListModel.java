@@ -2,7 +2,10 @@ package com.springboot.videoservice.app.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.Locale.Category;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,6 +43,10 @@ public class PlayListModel {
    
    @Column(name = "orderNumber")
    public int orderNumber;
+   
+   //svaki video ima Kategoriju
+   @Column(name = "category")
+   Set<Category> category = new HashSet<>();
    
    public long getId() {
 	  return id;

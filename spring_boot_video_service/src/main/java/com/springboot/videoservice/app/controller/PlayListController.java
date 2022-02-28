@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,4 +49,24 @@ public class PlayListController { //Controller depends on Service layer
     public ResponseEntity<PlayListModel> getPlayListById(@PathVariable("id") long playList_id){
        return new ResponseEntity<PlayListModel>(playlistService.getPlayListById(playList_id), HttpStatus.OK);
     }
+    
+    // build UPDATE PlayList Data REST API, to Update PlayList Data fields from DB
+    // http://localhost:8080/api/playlist/1
+    // we use ResponseEntity as a return type
+    @PutMapping("{id}")
+    public ResponseEntity<PlayListModel> updatePlayList(@PathVariable("id") long id, @RequestBody PlayListModel playList){
+       return new ResponseEntity<PlayListModel>(playlistService.updatePlayList(playList, id), HttpStatus.OK);
+    }
+    
+    // build DELETE PlayList Data REST API
+    // http://localhost:8080/api/playlist/1    
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletePlayList(@PathVariable("id") long id){
+    	
+ 	   //delete PlayList from DB
+       playlistService.deletePlayList(id);
+       
+       return new ResponseEntity<String>("Play List deleted successfully !", HttpStatus.OK);
+    }
+    
 }
