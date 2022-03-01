@@ -25,7 +25,7 @@ public class VideoController { //Controller depends on Service layer
 	private VideoService videoService;
 
 	public VideoController(VideoService videoService) {
-		super();
+		//super();
 		this.videoService = videoService;
 	}
 
@@ -46,7 +46,7 @@ public class VideoController { //Controller depends on Service layer
     // this is dynamic path variable
 	@GetMapping("{id}")
 	public ResponseEntity<VideoModel> getVideoById(@PathVariable("id") long video_id){
-	   return new ResponseEntity<VideoModel>(videoService.getVdeoById(video_id), HttpStatus.OK);	
+	   return new ResponseEntity<VideoModel>(videoService.getVideoById(video_id), HttpStatus.OK);	
 	}
 	
 	

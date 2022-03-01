@@ -14,12 +14,7 @@ public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;
 
-	public UserServiceImpl() {
-	   super();
-	}
-
 	public UserServiceImpl(UserRepository userRepository) {
-		super();
 		this.userRepository = userRepository;
 	}
 

@@ -14,15 +14,8 @@ import com.springboot.videoservice.app.service.ChannelPlayListService;
 public class ChannelPlayListServiceImpl implements ChannelPlayListService {
 
 	private ChannelPlayListRepository channelPlayListRepository;
-	
-	
-
-	public ChannelPlayListServiceImpl() {
-		super();
-	}
 
 	public ChannelPlayListServiceImpl(ChannelPlayListRepository channelPlayListRepository) {
-		super();
 		this.channelPlayListRepository = channelPlayListRepository;
 	}
 

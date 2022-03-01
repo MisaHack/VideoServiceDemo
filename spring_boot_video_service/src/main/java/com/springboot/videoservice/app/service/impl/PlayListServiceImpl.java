@@ -15,12 +15,7 @@ public class PlayListServiceImpl implements PlayListService{
 
 	private PlayListRepository playListRepository;
 	
-	public PlayListServiceImpl(){
-		
-	}
-	
 	public PlayListServiceImpl(PlayListRepository playListRepository) {
-		super();
 		this.playListRepository = playListRepository;
 	}
 
@@ -52,7 +47,6 @@ public class PlayListServiceImpl implements PlayListService{
 	   //we need to check does PlayList with the given id exist in DB or not
 	   PlayListModel existingPlayList = playListRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", id));
 
-	   existingPlayList.setId(playList.getId());
 	   existingPlayList.setName(playList.getName());
 	   existingPlayList.setChannelPlayLists(playList.getChannelPlayLists());
 	   existingPlayList.setOrderNumber(playList.getOrderNumber());

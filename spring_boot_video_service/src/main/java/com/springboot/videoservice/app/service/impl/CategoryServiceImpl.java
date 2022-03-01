@@ -14,13 +14,8 @@ import com.springboot.videoservice.app.service.CategoryService;
 public class CategoryServiceImpl implements CategoryService{
 	
 	private CategoryRepository categoryRepository;
-	
-	public CategoryServiceImpl() {
-		super();
-	}
 
 	public CategoryServiceImpl(CategoryRepository categoryRepository) {
-		super();
 		this.categoryRepository = categoryRepository;
 	}
 

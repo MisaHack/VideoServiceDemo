@@ -16,11 +16,7 @@ public class PlayListVideoServiceImpl implements PlayListVideoService {
 
 	private PlayListVideoRepository playListVideoRepository;
 
-	public PlayListVideoServiceImpl() {
-	}
-
 	public PlayListVideoServiceImpl(PlayListVideoRepository playListVideoRepository) {
-		super();
 		this.playListVideoRepository = playListVideoRepository;
 	}
 

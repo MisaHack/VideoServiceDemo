@@ -6,26 +6,21 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservice.app.exception.ResourceNotFoundException;
-import com.springboot.videoservice.app.model.UserModel;
 import com.springboot.videoservice.app.model.VideoModel;
-import com.springboot.videoservice.app.repository.UserRepository;
 import com.springboot.videoservice.app.repository.VideoRepository;
 import com.springboot.videoservice.app.service.VideoService;
 
+import lombok.RequiredArgsConstructor;
+//@RequiredArgsConstructor
 @Service
 public class VideoServiceImpl implements VideoService{
 
-	private VideoRepository videoRepository;
-	
-	public VideoServiceImpl() {
-		super();
-	}
+	private final VideoRepository videoRepository;
 
-	public VideoServiceImpl(VideoRepository videoRepository) {
-		super();
-		this.videoRepository = videoRepository;
+	public VideoServiceImpl(VideoRepository videoRepository) { 
+	   this.videoRepository = videoRepository; 
 	}
-
+	 
 	@Override
 	public VideoModel saveVideo(VideoModel video) {
 		return videoRepository.save(video);
@@ -37,7 +32,7 @@ public class VideoServiceImpl implements VideoService{
 	}
 
 	@Override
-	public VideoModel getVdeoById(long id) {
+	public VideoModel getVideoById(long id) {
 	   Optional<VideoModel> video = videoRepository.findById(id);
 	   
 	   if(video.isPresent()) {

@@ -15,11 +15,7 @@ public class ChannelServiceImpl implements ChannelService{
 
 	private ChannelRepository channelRepository;
 	
-	public ChannelServiceImpl(){
-	}
-	
 	public ChannelServiceImpl(ChannelRepository channelRepository) {
-		super();
 		this.channelRepository = channelRepository;
 	}
 
@@ -51,7 +47,6 @@ public class ChannelServiceImpl implements ChannelService{
 	   //we need to check does Channel with the given id exist in DB or not
 	   ChannelModel existingChannel = channelRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Channel","id",id));
 	   
-	   existingChannel.setId(channel.getId());
 	   existingChannel.setName(channel.getName());
 	   existingChannel.setChannelPlayLists(channel.getChannelPlayLists());
 	   

@@ -33,7 +33,7 @@ public class CategoryController { // Controller depends on Service layer
 	   return new ResponseEntity<CategoryModel>(categoryService.saveCategory(category), HttpStatus.CREATED);	
 	}
 	
-	// build GET ALL Category REST API, to return ALL Categoryss from DB	
+	// build GET ALL Categories REST API, to return ALL Categories from DB	
 	@GetMapping("{id}")
 	public ResponseEntity<CategoryModel> getCategoryById(@PathVariable("id") long category_id){
 	   return new ResponseEntity<CategoryModel>(categoryService.getCategoryById(category_id), HttpStatus.OK);	

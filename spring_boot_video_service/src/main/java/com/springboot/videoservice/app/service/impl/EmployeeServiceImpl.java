@@ -17,11 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	private EmployeeRepository employeeRepository;
 	
-	public EmployeeServiceImpl(){
-	}
-	
 	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-		super();
 		this.employeeRepository = employeeRepository;
 	}
 
