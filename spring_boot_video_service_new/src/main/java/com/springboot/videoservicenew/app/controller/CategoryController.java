@@ -1,5 +1,7 @@
 package com.springboot.videoservicenew.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,14 @@ public class CategoryController { // Controller depends on Service layer
 	}
 	
 	// build GET ALL Categories REST API, to return ALL Categories from DB	
+    // http://localhost:8080/api/categories
+    // this is dynamic path variable    
+	@GetMapping
+	public List<CategoryModel> getAllCategories(){
+	   return categoryService.getAllCategories();
+	}
+	
+	// build GET Category BY ID REST API, to return Category BY ID from DB
 	@GetMapping("{id}")
 	public ResponseEntity<CategoryModel> getCategoryById(@PathVariable("id") long category_id){
 	   return new ResponseEntity<CategoryModel>(categoryService.getCategoryById(category_id), HttpStatus.OK);	

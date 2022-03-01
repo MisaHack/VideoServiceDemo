@@ -1,9 +1,6 @@
 package com.springboot.videoservicenew.app.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Locale.Category;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -25,6 +24,7 @@ public class VideoModel {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "video_id")
    public long id;
    
    @Column(name="name")
@@ -32,6 +32,15 @@ public class VideoModel {
    
    @Column(name="orderNumber")
    public int orderNumber;
+   
+   //svaki Video ima Kategoriju
+   @ManyToMany(cascade = CascadeType.ALL)
+   @JoinTable(
+      name = "video_categories",
+      joinColumns = @JoinColumn(name = "video_id"),
+      inverseJoinColumns = @JoinColumn(name = "category_id")
+   )
+   private Set<CategoryModel> categories_in_video = new HashSet<>();
    
    //ovde treba kolekcija PlayListVideo
    //@OneToMany(mappedBy = "videoModel", cascade = CascadeType.ALL)

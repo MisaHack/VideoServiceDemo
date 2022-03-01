@@ -45,15 +45,15 @@ public class PlayListModel {
    @Column(name = "orderNumber")
    public int orderNumber;
    
-   //svaki video ima Kategoriju
+   //svaka PlayLista ima Kategoriju
    //@Column(name = "category")
    @ManyToMany(cascade = CascadeType.ALL)
    @JoinTable(
-	  name = "playlists_categories",
+	  name = "playlist_categories",
 	  joinColumns = @JoinColumn(name = "playList_id"),
 	  inverseJoinColumns = @JoinColumn(name = "category_id")
    )
-   private Set<CategoryModel> categories = new HashSet<>();
+   private Set<CategoryModel> categories_in_playlist = new HashSet<>();
    
    public long getId() {
 	  return id;

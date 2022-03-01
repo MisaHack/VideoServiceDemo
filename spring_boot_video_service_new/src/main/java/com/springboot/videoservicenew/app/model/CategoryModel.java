@@ -22,10 +22,15 @@ public class CategoryModel {
    @Column(name = "category_id")
    private long id;
    
-   @Column(name = "category_name", nullable = false)
+   @Column(name = "category_name")
    private String category_name;
    
-   @ManyToMany(mappedBy = "categories")
+   //ovim se povezujemo sa Playlist-om
+   @ManyToMany(mappedBy = "categories_in_playlist")
    private Set<PlayListModel> playLists;
+   
+   //ovim se povezujemo sa Videom
+   @ManyToMany(mappedBy = "categories_in_video")
+   private Set<VideoModel> videos;
    
 }

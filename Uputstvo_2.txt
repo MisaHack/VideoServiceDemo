@@ -266,3 +266,117 @@ logovanje za manipulaciju treba logovati, da se vidi kako se nesto izvrsavalo
 Sto se tice mapera - Model Maper - on pokusava da proceni sam sta hocemo da mapiramo, u nekom fajlu se definisu pravila kako se sta na sta mapira
 
 private final org.modelmaper.modelmapper modelMapper;
+
+---------------------------------------------------
+
+logeri se koriste umesto System.out.println() sto je nekada davno bio slucaj
+
+postoji wraper SL4J, nas ne zanima implementacija, njega koristimo kao wraper
+
+desni klik na metodu -> goToTest -> testa nema pa ce IDE ponuditi da ga kreira -> kreirace neku test metodu
+
+@Test - oznacava test klasu, mi koristimo Assertion (import static org.junit.jupiter.api.Assertion.*) 
+
+@Test
+void givenPlaylistWithPlaylistVideo_whenSortVideos_thenPlaylistVideoCollectionIsSorted{
+
+//given (postavljamo sve vrednosti)
+PlayList playlist = new PlayList();
+playlist.setName("playlist");
+Video video1 = new Video();
+video1.setName("video1");
+Video video2 = new Video();
+video2.setName("video2");
+Video video3 = new Video();
+video3.setName("video3");
+
+playlist.getPlaylistVideos().add(new PlaylistVideo(playlist, video1, position1));
+playlist.getPlaylistVideos().add(new PlaylistVideo(playlist, video3, position3));
+playlist.getPlaylistVideos().add(new PlaylistVideo(playlist, video2, position2));
+
+
+//when (ovo je zapravo poziv nase metode)
+VideoOrderService service = new VideoOrderServiceImplementation(playlistService);
+List<Video> videos = service.sortVideos(playlist);
+
+
+
+//then ( sa Assert funkcijama proveravamo ono sto nam treba, ima dosta Assert funkcija)
+assertNotNull(videos);
+assertFalse(video.isEmpty()); //proverava da li je kolekcija prazna
+assertEquals(expected:3 , videos.size()); //koliko mi ocekujemo elemenata na izlazu
+
+assertNotNull(videos.get(0));
+assertEquals(expected:"video1", video.get(0).getName()); //proveravamo da li je naziv prvog videa iz kolekcije "video1"
+assertEquals(expected:"video2", video.get(1).getName()); //proveravamo da li je naziv prvog videa iz kolekcije "video2"
+assertEquals(expected:"video3", video.get(2).getName()); //proveravamo da li je naziv prvog videa iz kolekcije "video3"
+
+
+}
+
+
+mi cemo najcesce raditi Testiranje servisnog nivoa
+
+Shift+F6 ---> refaktorisanje
+
+//given - blok u kome se definisu pocetni elementi, mi kontrolisemo ulazne elemente, i nikada ne koristimo zivu bazu ili koristimo bazu sa predefinisanim parametrima
+
+//when
+
+
+//then
+
+postoji gomila Assert Funkcija koje nesto proveravaju (te funcije ocekuju nesto i proveravaju da li je nas rezultat tacan)
+
+TEST DRIVEN DEVELOPMENT - pisemo test pre implementacije ! pisemo sta treba da treba da testiramo, navodimo koji uslovi trebaju da se ispune. normalan ciklus : test, implementacija, dodamo uslove
+
+
+@Test
+void givenPlaylistVideoNotEmpty_whenClearVideos_thenCollectionIsEmpty(){
+
+//given
+PlayList playlist = new PlayList();
+playlist.setName("playlist");
+Video video1 = new Video();
+video1.setName("video1");
+Video video2 = new Video();
+video2.setName("video2");
+Video video3 = new Video();
+video3.setName("video3");
+
+playlist.getPlaylistVideos().add(new PlaylistVideo(playlist, video1, position1));
+playlist.getPlaylistVideos().add(new PlaylistVideo(playlist, video3, position3));
+playlist.getPlaylistVideos().add(new PlaylistVideo(playlist, video2, position2));
+
+//when 
+VideoOrderService service = new VideoOrderServiceImplementation(playlistService);
+Lservice.clearVideo(playlist);
+
+
+}
+
+
+CILJ TESTA JE DA SE DOBIJE MINIMALNI KOD KOJI RADI ! (ciklus : Test, kod, refaktor)
+
+
+Fokusiracemo se na testiranje servisnog nivoa - Mocking - biblioteka Mockito
+
+CILJ UNIT TESTA JE TESTIRANJE DELA KODA KOJI NAS INTERESUJE !
+
+POZELJNO JE DA SE IZ TESTA ZAKLJUCI STA FUNKCIJA RADI! 
+
+POZELJNO JE DOKUMENTOVATI NAS INTERFEJS !
+
+/**
+*
+*  clears Video collection from given playlist
+*
+*  method accepts null lost or empty list
+*
+*  if playlist has null video list, method updates video list to empty list
+*
+*  @param playlist the playlist
+*  @throws NullPointerException if playlist has null collection
+*/
+void clearVideos(Playlist playlist);
+
