@@ -1,7 +1,8 @@
 package com.springboot.videoservicenew.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.Locale.Category;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,17 +35,6 @@ public class PlayListModel {
    @Column(name = "name")
    public String name;
    
-   /*@Column(name = "user")
-   public UserModel user;*/
-   
-   //fali VIDEOS - dodat je na ovaj nacin
-   //@OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
-   //Collection <PlayListVideoModel> playListVideos = new ArrayList<>();
-   
-   //ovo je konekcija za Channel na Playlistu
-   //@OneToMany(mappedBy = "channelModel", cascade = CascadeType.ALL)   
-   //Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
-   
    @Column(name = "orderNumber")
    public int orderNumber;
    
@@ -56,7 +47,18 @@ public class PlayListModel {
 	  joinColumns = @JoinColumn(name = "playList_id"),
 	  inverseJoinColumns = @JoinColumn(name = "category_id")
    )
-   private Set<CategoryModel> categories_in_playlist = new HashSet<>();
+   private Set<CategoryModel> categories_in_playlist = new HashSet<>();   
+   
+   //fali VIDEOS - dodat je na ovaj nacin
+   @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
+   Collection <PlayListVideoModel> playListVideo = new ArrayList<>();
+   
+   /*@Column(name = "user")
+   public UserModel user;*/
+   
+   //ovo je konekcija za Channel na Playlistu
+   //@OneToMany(mappedBy = "channelModel", cascade = CascadeType.ALL)   
+   //Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
    
    public long getId() {
 	  return id;

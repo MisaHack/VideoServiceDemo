@@ -1,5 +1,7 @@
 package com.springboot.videoservicenew.app.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,8 +49,8 @@ public class VideoModel {
    private Set<CategoryModel> categories_in_video = new HashSet<>();
    
    //ovde treba kolekcija PlayListVideo
-   //@OneToMany(mappedBy = "videoModel", cascade = CascadeType.ALL)
-   //Collection<PlayListVideoModel> playListVideo = new ArrayList<>();
+   @OneToMany(mappedBy = "videoModel", cascade = CascadeType.ALL)
+   Collection<PlayListVideoModel> playListVideo = new ArrayList<>();
    
    //svaki video ima Kategoriju
    //@Column(name = "category")

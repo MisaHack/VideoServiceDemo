@@ -44,7 +44,7 @@ public class PlayListVideoServiceImpl implements PlayListVideoService {
 	@Override
 	public PlayListVideoModel updatePlayListVideo(PlayListVideoModel playListVideo, long id) {
 	   
-       //we need to check does PlayList with the given id exist in DB or not
+        //we need to check does PlayList with the given id exist in DB or not
 		PlayListVideoModel existingPlayListVideo = playListVideoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayListVideo", "id", id));
 		
 		existingPlayListVideo.setPlayListModel(playListVideo.getPlayListModel());
