@@ -68,5 +68,4 @@ public class VideoController { //Controller depends on Service layer
 	   
 	   return new ResponseEntity<String>("Video deleted successfully !", HttpStatus.OK);
 	}
-	
 }

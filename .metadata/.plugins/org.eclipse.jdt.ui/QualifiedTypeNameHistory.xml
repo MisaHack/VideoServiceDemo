@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.persistence.MapsId"/>
     <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.ChannelPlayListId"/>
     <fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
-    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.repository.ChannelRepository"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.service.impl.ChannelServiceImpl"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.service.ChannelService"/>
@@ -43,7 +41,6 @@
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
@@ -56,8 +53,11 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.CategoryModel"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
-    <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="javax.persistence.Column"/>
+    <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
 </qualifiedTypeNameHistroy>

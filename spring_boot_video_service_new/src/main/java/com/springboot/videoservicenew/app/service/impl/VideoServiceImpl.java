@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
+import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.VideoModel;
+import com.springboot.videoservicenew.app.repository.CategoryRepository;
 import com.springboot.videoservicenew.app.repository.VideoRepository;
 import com.springboot.videoservicenew.app.service.service2.VideoService;
 
@@ -16,9 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class VideoServiceImpl implements VideoService{
 
 	private VideoRepository videoRepository;
+	
+	private CategoryRepository categoryRepository;
 
-	public VideoServiceImpl(VideoRepository videoRepository) {
+	public VideoServiceImpl(VideoRepository videoRepository, CategoryRepository categoryRepository) {
 		this.videoRepository = videoRepository;
+		this.categoryRepository = categoryRepository;
+
 	}
 
 	@Override
@@ -67,5 +73,21 @@ public class VideoServiceImpl implements VideoService{
 	   
 	   videoRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public VideoModel addCategoryToVideo(long video_id, long category_id) {
+		
+		//we need to check does Video with the given id exist in DB or not	
+		VideoModel existingVideo = videoRepository.findById(video_id).orElseThrow(() -> new ResourceNotFoundException("Video","id",video_id));
+		
+		//we need to check does Category with the given id exist in DB or not	
+		CategoryModel existingCategory = categoryRepository.findById(category_id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", category_id));
+		
+		existingVideo.getCategories_in_video().add(existingCategory);
+		
+		videoRepository.save(existingVideo);
+		
+		return existingVideo;
 	}
 }

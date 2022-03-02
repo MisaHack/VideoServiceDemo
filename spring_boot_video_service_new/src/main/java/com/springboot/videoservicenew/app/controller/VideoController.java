@@ -69,4 +69,12 @@ public class VideoController { //Controller depends on Service layer
 	   return new ResponseEntity<String>("Video deleted successfully !", HttpStatus.OK);
 	}
 	
+	// build ADD_CATEGORY_TO_VIDEO REST API, to add category to video
+	// http://localhost:8080/api/video/1/category/1
+	// we use ResponseEntity as a return type
+	@PutMapping("/{video_id}/category/{category_id}")
+	public ResponseEntity<VideoModel> addCategoryToVideo(@PathVariable("video_id") long video_id, @PathVariable("category_id") long category_id){
+	   return new ResponseEntity<VideoModel>(videoService.addCategoryToVideo(video_id, category_id), HttpStatus.OK);
+	}
+	
 }

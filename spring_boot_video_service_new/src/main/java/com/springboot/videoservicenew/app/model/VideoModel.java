@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -34,6 +36,7 @@ public class VideoModel {
    public int orderNumber;
    
    //svaki Video ima Kategoriju
+   @JsonIgnore
    @ManyToMany(cascade = CascadeType.ALL)
    @JoinTable(
       name = "video_categories",

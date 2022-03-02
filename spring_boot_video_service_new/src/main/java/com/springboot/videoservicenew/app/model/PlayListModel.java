@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -47,6 +49,7 @@ public class PlayListModel {
    
    //svaka PlayLista ima Kategoriju
    //@Column(name = "category")
+   @JsonIgnore
    @ManyToMany(cascade = CascadeType.ALL)
    @JoinTable(
 	  name = "playlist_categories",

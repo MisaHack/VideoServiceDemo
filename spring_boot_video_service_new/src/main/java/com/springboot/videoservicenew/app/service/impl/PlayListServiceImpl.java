@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
+import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
+import com.springboot.videoservicenew.app.repository.CategoryRepository;
 import com.springboot.videoservicenew.app.repository.PlayListRepository;
 import com.springboot.videoservicenew.app.service.service2.PlayListService;
 
@@ -15,8 +17,11 @@ public class PlayListServiceImpl implements PlayListService{
 
 	private PlayListRepository playListRepository;
 	
-	public PlayListServiceImpl(PlayListRepository playListRepository) {
+	private CategoryRepository categoryRepository;
+	
+	public PlayListServiceImpl(PlayListRepository playListRepository, CategoryRepository categoryRepository) {
 		this.playListRepository = playListRepository;
+		this.categoryRepository = categoryRepository;
 	}
 
 	@Override
@@ -63,6 +68,36 @@ public class PlayListServiceImpl implements PlayListService{
 	   playListRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", id));
 	   
 	   playListRepository.deleteById(id);
+	}
+
+	@Override
+	public PlayListModel addCategoryToPlayList(long play_list_id, long category_id) {
+	   
+       //we need to check does Play List with the given id exist in DB or not	
+	   PlayListModel existingPlayList = playListRepository.findById(play_list_id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", play_list_id));
+	   
+	   //we need to check does Category with the given id exist in DB or not
+	   CategoryModel existingCategory = categoryRepository.findById(category_id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", category_id));
+	   
+	   existingPlayList.getCategories_in_playlist().add(existingCategory);
+	   
+	   playListRepository.save(existingPlayList);
+	   
+	   return existingPlayList;
+	}
+
+	@Override
+	public void deleteCategoryFromPlayList(long play_list_id, long category_id) {
+	   
+	   //we need to check does Play List with the given id exist in DB or not	
+	   PlayListModel existingPlayList = playListRepository.findById(play_list_id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", play_list_id));
+		   
+	   //we need to check does Category with the given id exist in DB or not
+	   CategoryModel existingCategory = categoryRepository.findById(category_id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", category_id));
+	  
+	   existingPlayList.getCategories_in_playlist().remove(existingCategory);
+	   existingCategory.getPlayLists().remove(existingPlayList);
+		
 	}
 
 }

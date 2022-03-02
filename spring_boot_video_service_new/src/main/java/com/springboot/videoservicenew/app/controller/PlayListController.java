@@ -69,4 +69,24 @@ public class PlayListController { //Controller depends on Service layer
        return new ResponseEntity<String>("Play List deleted successfully !", HttpStatus.OK);
     }
     
+	// build ADD_CATEGORY_TO_PLAY_LIST REST API, to add category to Play List
+	// http://localhost:8080/api/playlist/1/category/1
+	// we use ResponseEntity as a return type
+    @PutMapping("/{play_list_id}/category/{category_id}")
+    public ResponseEntity<PlayListModel> addCategoryToPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("category_id") long category_id){
+       return new ResponseEntity<PlayListModel>(playlistService.addCategoryToPlayList(play_list_id, category_id), HttpStatus.OK);
+    }
+    
+	// build REMOVE_CATEGORY_FROM_PLAY_LIST REST API, to Remove Category from Play List
+	// http://localhost:8080/api/playlist/1/category/1
+	// we use String as a return type   
+    @DeleteMapping("/{play_list_id}/category/{category_id}")
+    public ResponseEntity<String> deleteCategoryFromPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("category_id") long category_id){
+    	
+       //delete Category from Play List
+       playlistService.deleteCategoryFromPlayList(play_list_id, category_id);
+       
+       return new ResponseEntity<String>("Category deleted successfully from Play List !", HttpStatus.OK);
+    }
+    
 }

@@ -10,4 +10,5 @@ public interface VideoService {
    VideoModel getVideoById(long id);
    VideoModel updateVideo(VideoModel video, long id);
    void deleteVideo(long id);
+   VideoModel addCategoryToVideo(long video_id, long category_id);
 }

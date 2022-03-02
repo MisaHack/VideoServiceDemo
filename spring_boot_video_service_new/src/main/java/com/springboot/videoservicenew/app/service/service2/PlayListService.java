@@ -10,4 +10,6 @@ public interface PlayListService {
    PlayListModel getPlayListById(long id);
    PlayListModel updatePlayList(PlayListModel playList, long id);
    void deletePlayList(long id);
+   PlayListModel addCategoryToPlayList(long play_list_id, long category_id);
+   void deleteCategoryFromPlayList(long play_list_id, long category_id);
 }
