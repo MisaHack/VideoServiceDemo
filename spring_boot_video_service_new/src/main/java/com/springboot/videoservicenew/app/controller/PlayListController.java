@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.videoservicenew.app.model.ChannelModel;
+import com.springboot.videoservicenew.app.dto.PlayListDTO;
 import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.service.service2.PlayListService;
 
@@ -110,4 +110,13 @@ public class PlayListController { //Controller depends on Service layer
        return new ResponseEntity<String>("Video deleted from Play List !", HttpStatus.OK);
     }   
     
+	// build GET ALL Play List as DTO format REST API, to return ALL Play List from DB in DTO format	
+    // http://localhost:8080/api/playlists/getAllPlayListAsDto
+    // this is dynamic path variable    
+    @GetMapping("/getAllPlayListAsDto")
+	public List<PlayListDTO> getAllPlayListsAsDTO(){
+		
+	   return playlistService.getAllPlayListsAsDTO();
+	   
+	}
 }

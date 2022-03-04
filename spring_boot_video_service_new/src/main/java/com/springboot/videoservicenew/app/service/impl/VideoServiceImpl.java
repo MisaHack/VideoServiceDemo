@@ -1,10 +1,12 @@
 package com.springboot.videoservicenew.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservicenew.app.dto.VideoDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
 import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.VideoModel;
@@ -89,5 +91,33 @@ public class VideoServiceImpl implements VideoService{
 		videoRepository.save(existingVideo);
 		
 		return existingVideo;
+	}
+
+	//Service for converting Video Entity to Video with less data
+	@Override
+	public VideoDTO convertEntityToDTO(VideoModel videoModel) {
+
+	   VideoDTO videoDTO = new VideoDTO();
+	   
+	   videoDTO.setVideo_name(videoModel.getName());
+	   
+	   return videoDTO;
+	}
+
+	@Override
+	public List<VideoDTO> getAllVideosAsDTO() {
+	  
+	   List<VideoModel> videos = videoRepository.findAll();
+	   
+	   List<VideoDTO> videosDTO = new ArrayList<>();
+	   
+	   VideoServiceImpl vidSerImpl = new VideoServiceImpl(videoRepository, categoryRepository);
+	   
+	   for(int i=0; i < videos.size() ; i++){
+		  videosDTO.add(vidSerImpl.convertEntityToDTO(videos.get(i))); 
+	   }
+	   
+	   return videosDTO;
+	   
 	}
 }

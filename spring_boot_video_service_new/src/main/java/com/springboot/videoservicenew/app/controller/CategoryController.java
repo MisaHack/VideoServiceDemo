@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.videoservicenew.app.dto.CategoryDTO;
 import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.service.service2.CategoryService;
 
@@ -64,4 +65,16 @@ public class CategoryController { // Controller depends on Service layer
 	   
 	   return new ResponseEntity<String>("Category deleted successfully !", HttpStatus.OK);
 	}
+	
+	// build GET ALL Categories as DTO format REST API, to return ALL Categories from DB in DTO format	
+    // http://localhost:8080/api/categories/getAllCatAsDto
+    // this is dynamic path variable    
+	@GetMapping("/getAllCatAsDto")
+	public List<CategoryDTO> getAllCategoriesAsDTO(){
+       
+	   return categoryService.getAllCategoriesAsDTO();
+		
+	}
+	
+	
 }

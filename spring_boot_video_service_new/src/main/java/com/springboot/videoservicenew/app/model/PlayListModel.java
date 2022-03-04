@@ -74,6 +74,7 @@ public class PlayListModel {
    }
    //ove metode add i remove sam isto naknadno dodao
    public void removeVideo(VideoModel videoModel){
+	   
 	  for(Iterator<PlayListVideoModel> iterator = playListVideos.iterator(); iterator.hasNext();){
 		 PlayListVideoModel playListVideoModel = iterator.next();
 		 

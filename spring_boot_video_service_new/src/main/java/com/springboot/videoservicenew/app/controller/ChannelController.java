@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.videoservicenew.app.dto.ChannelDTO;
 import com.springboot.videoservicenew.app.model.ChannelModel;
 import com.springboot.videoservicenew.app.service.service2.ChannelService;
 
@@ -87,6 +88,16 @@ public class ChannelController { //Controller depends on Service layer
     	
     	return new ResponseEntity<String>("Play List deleted from Channel !", HttpStatus.OK);
     }
+    
+	// build GET ALL Channels as DTO format REST API, to return ALL Channels from DB in DTO format	
+    // http://localhost:8080/api/channels/getAllChannAsDto
+    // this is dynamic path variable    
+	@GetMapping("/getAllChannAsDto")
+	public List<ChannelDTO> getAllChannelsDTO(){
+       
+	   return channelService.getAllChannelAsDTO();
+		
+	}
     
     
 }

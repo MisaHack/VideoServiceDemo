@@ -380,3 +380,49 @@ POZELJNO JE DOKUMENTOVATI NAS INTERFEJS !
 */
 void clearVideos(Playlist playlist);
 
+---------------------------------------------------
+
+INTEGRATION TESTOVI
+
+razlika izmedju UNIT i INTEGRATION : unit izoluju proces/funkciju tako da mi testiramo samo taj konkretan UNIT (nezavisno od ostatka sistema). INTEGRATION zato testiraju vise slojeva (npr. test servisnog sloja i DAO layer). Mi kao developeri ne testiramo aplikaciju na nacin na koji korisnici testiraju (to je zadatak za QA). 
+
+Bitno je da kostanje greske kod developera je 1$, pa dalje 10$, pa kod korisnika kada stigne je 1000$
+Nemamo izgovora da ne radimo testiranje.
+
+Razlikuje se i setup testova kod Unit i Integration.
+
+Kada radimo sa Spring Boot moramo da inicijalizujemo Spring Boot Context.
+
+Na GitHub treba da dodje samo kod koji je testiran.
+
+Menjanje tudjih testova i koda za deo za koji nismo mi bili zaduzeni, NE SME da se radi bez dogovora sa drugim developerima o promeni specifikacije.
+
+@SpringBootTest - anotacija za inicijalizaciju INTEGRATION TESTOVA
+
+Free Marker Template Engine - je Branimir koristio
+
+I kod INTEGRATION TESTA su uvek POZNATI ULAZNI PODACI U SISTEM , isto kao kod Unit testova
+
+@Transactional -
+
+@Autowired - repozitorijumi, servisi koje koristimo u testu
+
+TAG - su oznake koje su dodeljene projektima
+
+3 nacina za testiranje :
+
+   1) Obicno se testovi koriste nad H2 bazom ! 
+
+   2) TEST CONTAINERS - znaci da test koji pokrenemo, povlaci doker za bazu
+
+   3) Cista baza samo za testiranje, realna baza ! Znaci ne sme biti nikada nista u njoj kada testiramo !
+
+NIJE DOBRA PRAKSA DA AKO PISEMO JEDAN TEST DA EXTENDUJEMO NEKU DRUGU TEST KLASU ! ! !
+
+@AutoConfigureTestDatabase
+
+
+
+
+
+

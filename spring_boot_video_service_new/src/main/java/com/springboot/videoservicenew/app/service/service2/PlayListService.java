@@ -2,6 +2,8 @@ package com.springboot.videoservicenew.app.service.service2;
 
 import java.util.List;
 
+import com.springboot.videoservicenew.app.dto.PlayListDTO;
+import com.springboot.videoservicenew.app.dto.PlayListVideoDTO;
 import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.model.VideoModel;
 
@@ -15,4 +17,8 @@ public interface PlayListService {
    void deleteCategoryFromPlayList(long play_list_id, long category_id);
    PlayListModel addVideoToPlayList(long video_id, long play_list_id);
    void removeVideoFromPlayList(long video_id, long play_list_id);
+   PlayListDTO convertEntityToDTO(PlayListModel playListModel);
+   List<PlayListDTO> getAllPlayListsAsDTO();
+   PlayListVideoDTO convertPlayListVideoToDTO(PlayListModel playListModel, VideoModel videoModel);
+   List<PlayListVideoDTO> getAllPlayListVideoAsDTO();
 }

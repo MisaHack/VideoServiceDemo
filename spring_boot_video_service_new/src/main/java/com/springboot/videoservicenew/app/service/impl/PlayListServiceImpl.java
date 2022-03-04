@@ -1,14 +1,16 @@
 package com.springboot.videoservicenew.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservicenew.app.dto.PlayListDTO;
+import com.springboot.videoservicenew.app.dto.PlayListVideoDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
 import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
-import com.springboot.videoservicenew.app.model.PlayListVideoModel;
 import com.springboot.videoservicenew.app.model.VideoModel;
 import com.springboot.videoservicenew.app.repository.CategoryRepository;
 import com.springboot.videoservicenew.app.repository.PlayListRepository;
@@ -168,6 +170,54 @@ public class PlayListServiceImpl implements PlayListService{
 		 playListRepository.save(existingPlayList);
 		// videoRepository.save(existingVideo);
 		 
+	}
+
+	//Service for converting Play List Entity to Play List with less data
+	@Override
+	public PlayListDTO convertEntityToDTO(PlayListModel playListModel) {
+       
+	   PlayListDTO playListDTO = new PlayListDTO();
+	   
+	   playListDTO.setPlay_list_name(playListModel.getName());
+	   
+	   return playListDTO;
+	}
+
+	@Override
+	public List<PlayListDTO> getAllPlayListsAsDTO() {
+	   
+	   List<PlayListModel> playLists = playListRepository.findAll();
+	   
+	   List<PlayListDTO> playListsDTO = new ArrayList<>();
+	   
+	   PlayListServiceImpl playListSerImpl = new PlayListServiceImpl(playListRepository, categoryRepository, videoRepository);
+	   
+	   for(int i=0; i < playLists.size() ; i++){
+		  playListsDTO.add(playListSerImpl.convertEntityToDTO(playLists.get(i))); 
+	   }
+	   
+	   return playListsDTO;
+	}
+
+	@Override
+	public PlayListVideoDTO convertPlayListVideoToDTO(PlayListModel playListModel, VideoModel videoModel) {
+
+       PlayListVideoDTO playListVideoDTO = new PlayListVideoDTO();
+       
+       playListVideoDTO.setPlay_list_name(playListModel.getName());
+       
+       for(int i=0 ; i < videoModel.getPlayListVideo().size(); i++) {
+           playListVideoDTO.getVideo_name().add(videoModel.getName());
+       }
+       
+       return playListVideoDTO;
+       
+	}
+
+	@Override
+	public List<PlayListVideoDTO> getAllPlayListVideoAsDTO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.videoservicenew.app.dto.VideoDTO;
 import com.springboot.videoservicenew.app.model.VideoModel;
 import com.springboot.videoservicenew.app.service.service2.VideoService;
 
@@ -75,6 +76,16 @@ public class VideoController { //Controller depends on Service layer
 	@PutMapping("/{video_id}/category/{category_id}")
 	public ResponseEntity<VideoModel> addCategoryToVideo(@PathVariable("video_id") long video_id, @PathVariable("category_id") long category_id){
 	   return new ResponseEntity<VideoModel>(videoService.addCategoryToVideo(video_id, category_id), HttpStatus.OK);
+	}
+	
+	// build GET ALL Videos as DTO format REST API, to return ALL Videos from DB in DTO format	
+    // http://localhost:8080/api/video/getAllVideoAsDto
+    // this is dynamic path variable    
+	@GetMapping("/getAllVideoAsDto")
+	public List<VideoDTO> getAllVideosAsDTO(){
+		
+	   return videoService.getAllVideosAsDTO();
+	   
 	}
 	
 }

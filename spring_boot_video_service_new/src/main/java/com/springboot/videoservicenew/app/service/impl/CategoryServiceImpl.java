@@ -1,10 +1,12 @@
 package com.springboot.videoservicenew.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservicenew.app.dto.CategoryDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
 import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.repository.CategoryRepository;
@@ -62,6 +64,34 @@ public class CategoryServiceImpl implements CategoryService{
 	   
 	   categoryRepository.deleteById(id);
 		
+	}
+	
+	//Service for convering Category Entity to Category with less data
+	public CategoryDTO convertEntityToDTO(CategoryModel categoryModel){
+	   
+	   CategoryDTO categoryDTO = new CategoryDTO();
+	   
+	   categoryDTO.setCategory_name(categoryModel.getCategory_name());
+	   
+	   return categoryDTO;  
+	   
+	}
+	
+	//Return All Categories converted in DTO format
+	public List<CategoryDTO> getAllCategoriesAsDTO() {
+		   
+		List<CategoryModel> categories =  categoryRepository.findAll();
+		   
+	    List<CategoryDTO> categoriesDTO = new ArrayList<>();
+		   
+		CategoryServiceImpl catSerImpl = new CategoryServiceImpl(categoryRepository);
+		   
+		for(int i=0; i < categories.size(); i++){
+		   categoriesDTO.add(catSerImpl.convertEntityToDTO(categories.get(i)));
+			  
+		}
+		   
+		return categoriesDTO;
 	}
 
 }

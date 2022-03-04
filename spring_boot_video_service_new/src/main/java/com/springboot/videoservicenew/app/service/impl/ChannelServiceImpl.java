@@ -1,10 +1,12 @@
 package com.springboot.videoservicenew.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservicenew.app.dto.ChannelDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
 import com.springboot.videoservicenew.app.model.ChannelModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
@@ -99,6 +101,32 @@ public class ChannelServiceImpl implements ChannelService{
 		existingChannel.removePlayList(existingPlayList);
 		
 		channelRepository.save(existingChannel);
+	}
+
+	@Override
+	public ChannelDTO convertEntityToDTO(ChannelModel channelModel) {
+	       
+	   ChannelDTO channelDTO = new ChannelDTO();
+	       
+	   channelDTO.setChannel_name(channelModel.getName());
+	   
+	   return channelDTO;
+	}
+
+	@Override
+	public List<ChannelDTO> getAllChannelAsDTO() {
+	   
+       List<ChannelModel> channels = channelRepository.findAll();
+       
+       List<ChannelDTO> channelsDTO = new ArrayList<>();
+       
+       ChannelServiceImpl channelSerImpl = new ChannelServiceImpl(channelRepository, playListRepository);
+       
+       for(int i=0; i < channels.size() ; i++){
+    	  channelsDTO.add(channelSerImpl.convertEntityToDTO(channels.get(i)));
+       }
+       
+       return channelsDTO;
 	}
 	
 	
