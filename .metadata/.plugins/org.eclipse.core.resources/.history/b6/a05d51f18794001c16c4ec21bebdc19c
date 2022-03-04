@@ -1,8 +1,0 @@
-package com.springboot.videoservice.app.model;
-
-@Data
-@Entity
-@Table(name="Video")
-public class Video {
-
-}

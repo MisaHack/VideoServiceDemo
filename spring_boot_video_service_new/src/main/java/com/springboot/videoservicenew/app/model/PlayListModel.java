@@ -1,8 +1,9 @@
 package com.springboot.videoservicenew.app.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class PlayListModel {
    //svaka PlayLista ima Kategoriju
    //@Column(name = "category")
    @JsonIgnore
-   @ManyToMany(cascade = CascadeType.ALL)
+   @ManyToMany
    @JoinTable(
 	  name = "playlist_categories",
 	  joinColumns = @JoinColumn(name = "playList_id"),
@@ -50,15 +51,52 @@ public class PlayListModel {
    private Set<CategoryModel> categories_in_playlist = new HashSet<>();   
    
    //fali VIDEOS - dodat je na ovaj nacin
-   @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL)
-   Collection <PlayListVideoModel> playListVideo = new ArrayList<>();
+   @JsonIgnore
+   //@OneToMany(mappedBy = "playListModel", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
+   @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL, orphanRemoval = true)
+   //, orphanRemoval = true
+   //@OrphanRemoval
+   List<PlayListVideoModel> playListVideos = new ArrayList<>();
    
    /*@Column(name = "user")
    public UserModel user;*/
    
    //ovo je konekcija za Channel na Playlistu
-   //@OneToMany(mappedBy = "channelModel", cascade = CascadeType.ALL)   
-   //Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
+   @JsonIgnore
+   @OneToMany(mappedBy = "playListModel_c", cascade = CascadeType.ALL, orphanRemoval = true)   
+   List<ChannelPlayListModel> channelPlayLists = new ArrayList<>();
+   
+   //ove metode add i remove sam isto naknadno dodao
+   public void addVideo(VideoModel videoModel){
+	   PlayListVideoModel playListVideo = new PlayListVideoModel(this, videoModel);
+	   playListVideos.add(playListVideo);
+	   //videoModel.getPlayListVideo().add(playListVideo);
+   }
+   //ove metode add i remove sam isto naknadno dodao
+   public void removeVideo(VideoModel videoModel){
+	  for(Iterator<PlayListVideoModel> iterator = playListVideos.iterator(); iterator.hasNext();){
+		 PlayListVideoModel playListVideoModel = iterator.next();
+		 
+		 if(playListVideoModel.getVideoModel().equals(videoModel) && playListVideoModel.getPlayListModel().equals(this)){
+			iterator.remove();
+			playListVideoModel.getPlayListModel().getPlayListVideos().remove(playListVideoModel);
+			//playListVideoModel.setPlayListModel(null);
+			//playListVideoModel.setVideoModel(null);
+		 }
+	  }
+	   
+	   
+	  /* System.out.println("Usli smo ovde, treba da obrisemo video.");
+	   PlayListVideoModel v = playListVideos.stream().filter(p -> p.getVideoModel().equals(videoModel)).findFirst().orElse(null);
+	   if(v == null) {
+		   System.out.println("Usli smo ovde, v je null.");
+		   return;
+	   }
+
+	   System.out.println("Dosli smo do brisanja videa.");
+	   playListVideos.remove(v);
+	   videoModel.getPlayListVideo().remove(v);*/
+   }
    
    public long getId() {
 	  return id;

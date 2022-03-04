@@ -1,5 +1,0 @@
-package com.springboot.videoservice.app.repository;
-
-public interface ChannelRepository {
-
-}

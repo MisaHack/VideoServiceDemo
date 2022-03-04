@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.videoservicenew.app.model.ChannelModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.service.service2.PlayListService;
 
@@ -43,7 +44,7 @@ public class PlayListController { //Controller depends on Service layer
     }
     
     // build GET PlayList BY ID REST API, to return PlayList BY ID from DB
-    // http://localhost:8080/api/playlist/1
+    // http://localhost:8080/api/playlists/1
     // this is dynamic path variable    
     @GetMapping("{id}")
     public ResponseEntity<PlayListModel> getPlayListById(@PathVariable("id") long playList_id){
@@ -51,7 +52,7 @@ public class PlayListController { //Controller depends on Service layer
     }
     
     // build UPDATE PlayList Data REST API, to Update PlayList Data fields from DB
-    // http://localhost:8080/api/playlist/1
+    // http://localhost:8080/api/playlists/1
     // we use ResponseEntity as a return type
     @PutMapping("{id}")
     public ResponseEntity<PlayListModel> updatePlayList(@PathVariable("id") long id, @RequestBody PlayListModel playList){
@@ -59,7 +60,7 @@ public class PlayListController { //Controller depends on Service layer
     }
     
     // build DELETE PlayList Data REST API
-    // http://localhost:8080/api/playlist/1    
+    // http://localhost:8080/api/playlists/1    
     @DeleteMapping("{id}")
     public ResponseEntity<String> deletePlayList(@PathVariable("id") long id){
     	
@@ -70,7 +71,7 @@ public class PlayListController { //Controller depends on Service layer
     }
     
 	// build ADD_CATEGORY_TO_PLAY_LIST REST API, to add category to Play List
-	// http://localhost:8080/api/playlist/1/category/1
+	// http://localhost:8080/api/playlists/1/category/1
 	// we use ResponseEntity as a return type
     @PutMapping("/{play_list_id}/category/{category_id}")
     public ResponseEntity<PlayListModel> addCategoryToPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("category_id") long category_id){
@@ -78,7 +79,7 @@ public class PlayListController { //Controller depends on Service layer
     }
     
 	// build REMOVE_CATEGORY_FROM_PLAY_LIST REST API, to Remove Category from Play List
-	// http://localhost:8080/api/playlist/1/category/1
+	// http://localhost:8080/api/playlists/1/category/1
 	// we use String as a return type   
     @DeleteMapping("/{play_list_id}/category/{category_id}")
     public ResponseEntity<String> deleteCategoryFromPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("category_id") long category_id){
@@ -88,5 +89,25 @@ public class PlayListController { //Controller depends on Service layer
        
        return new ResponseEntity<String>("Category deleted successfully from Play List !", HttpStatus.OK);
     }
+    
+	// build ADD_VIDEO_TO_PLAY_LIST REST API, to add Video to Play List
+	// http://localhost:8080/api/playlists/1/video/1
+	// we use ResponseEntity as a return type
+    @PutMapping("/{play_list_id}/video/{video_id}")
+    public ResponseEntity<PlayListModel> addVideoToPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("video_id") long video_id){
+       return new ResponseEntity<PlayListModel>(playlistService.addVideoToPlayList(video_id, play_list_id), HttpStatus.OK);
+    }
+    
+	// build REMOVE_VIDEO_FROM_PLAY_LIST REST API, to remove Video from Play List
+	// http://localhost:8080/api/playlists/1/video/1
+	// we use ResponseEntity as a return type
+    @DeleteMapping("/{play_list_id}/video/{video_id}")
+    public ResponseEntity<String> deleteVideoFromPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("video_id") long video_id){
+        
+       // delete Video from Play List
+       playlistService.removeVideoFromPlayList(video_id, play_list_id);
+    	
+       return new ResponseEntity<String>("Video deleted from Play List !", HttpStatus.OK);
+    }   
     
 }

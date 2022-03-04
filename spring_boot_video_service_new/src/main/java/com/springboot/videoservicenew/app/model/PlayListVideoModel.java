@@ -15,7 +15,9 @@ import lombok.Data;
 public class PlayListVideoModel {
    
    @EmbeddedId
-   private PlayListVideoModelKey playListVideoId = new PlayListVideoModelKey(); 
+   private PlayListVideoModelKey playListVideoId ;
+   //= new PlayListVideoModelKey(); 
+   //ovo sam isto naknadno zakomentarisao
    
    @ManyToOne
    @MapsId("playListId")
@@ -30,6 +32,19 @@ public class PlayListVideoModel {
    //here we can add additional atribute that we add to the linking table
    //we also make getters and setters
   
-   private int some_additional_atribute;
+   //private int some_additional_atribute - in our case we want order number;
+   private int order_number;
+   
+   //ovo je prazan konstruktor koji sam naknadno dodao
+   public PlayListVideoModel() {
+	   
+   }
+   
+   //ovo sam naknadno dodao konstruktor
+   public PlayListVideoModel(PlayListModel playList, VideoModel video){
+	  this.playListModel=playList;
+	  this.videoModel=video;
+	  this.playListVideoId = new PlayListVideoModelKey(playList.getId(), video.getId());
+   }
    
 }

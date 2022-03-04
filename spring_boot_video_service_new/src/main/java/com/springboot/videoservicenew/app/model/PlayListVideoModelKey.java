@@ -12,11 +12,6 @@ import lombok.Data;
 @Embeddable
 public class PlayListVideoModelKey implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Column(name = "play_list_id")
 	private long playListId;
 	
@@ -39,6 +34,14 @@ public class PlayListVideoModelKey implements Serializable{
 		PlayListVideoModelKey other = (PlayListVideoModelKey) obj;
 		return playListId == other.playListId && videoId == other.videoId;
 	}
-
 	
+	//ovaj konstruktor sam naknadno dodao - bez njega je pucao program
+	public PlayListVideoModelKey() {}
+
+	//ovaj konstruktor sam naknadno dodao
+	public PlayListVideoModelKey(long playListId, long videoId) {
+		this.playListId = playListId;
+		this.videoId = videoId;
+	}
+
 }
