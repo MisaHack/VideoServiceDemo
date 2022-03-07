@@ -14,7 +14,7 @@ import com.springboot.videoservicenew.app.model.VideoModel;
 
 @DataJpaTest
 @ActiveProfiles("test")
-public class VideoRepositoryTestEmbedded {
+public class VideoRepositoryEmbeddedTest {
 
    @Autowired
    private VideoRepository videoRepository;
@@ -22,18 +22,20 @@ public class VideoRepositoryTestEmbedded {
    @Test
    public void shouldSaveUser(){
 	  //given
-	  VideoModel video = new VideoModel(1, "Spiderman 1");
+	  VideoModel video = new VideoModel("Spiderman 1", 1);
 	  
 	  //when
 	  VideoModel savedVideo = videoRepository.save(video);
 	  
 	  //then
-	  assertThat(savedVideo).usingRecursiveComparison().ignoringFields("video_id").isEqualTo(video);
+	  //assertThat(savedVideo).usingRecursiveComparison().ignoringFields("video_id").isEqualTo(video);
+	  assertThat(savedVideo).usingRecursiveComparison().isEqualTo(video);
    }
    
    @Test
-   @Sql("classpath: test-data.sql")
+   //@Sql("classpath: test-data.sql")
    //@Sql("{/test-data.sql}")
+   @Sql("/test-data.sql")
    public void shouldSaveUserThroughSqlFile(){
 	  Optional<VideoModel> test = videoRepository.findVideoByName("Titanic");
 	  

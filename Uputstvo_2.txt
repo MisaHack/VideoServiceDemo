@@ -439,4 +439,24 @@ INFO za Logove mozemo ostaviti u production logu
 
 ---------------------------------------------------
 
+Imena klasa trebaju da se zavrsavaju sa "Test", nije obavezno, ali stvar je konvencije i prakse
+
+kada pisemo upite za H2 bazu trebamo nazive kolona da stavimo pod jednostruke navodnike
+
+Maven kompajlira u ---> 
+ono sto se nalazi u Resource folderima on NE KOMPAJLIRA nego KOPIRA
+class path Mavenu pocinje u --->
+
+TEST -> JAVA -> RESOURCES -> SQL -> pa tu stavimo SQL skriptu, a mozemo staviti i application.properties
+
+@Transactional - staviti na Test klase, inace nece obrisati podatke koji su korisceni za test, tako da ce smetati narednom testu. U testu se ne garantuje redosled izvrsavanja testa.
+
+@BeforeEach, @AfterEach - nam mogu pomoci da odredimo koji ce se prvi test biti izvrsen
+
+NE PRETERIVATI SA UPOTREBOM SQL FAJLOVIMA !
+TESTOVI ISTE VRSTE TREBAJU DA RADE SA ISTIM SETOM PODATAKA !
+
+MOJE ZAPAZANJE : PRI TESTIRANJU NE PRAVITI OBJEKAT SA PREDEFINISANIM 'ID'-om JER OBJEKAT KOJI JE SACUVAN I ONAJ KOJI VRATI POSTMAN NISU ISTI IAKO DELUJU ISTI ! ! !
+
+
 
