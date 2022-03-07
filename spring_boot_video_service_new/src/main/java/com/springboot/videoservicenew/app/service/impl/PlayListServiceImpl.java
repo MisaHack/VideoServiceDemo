@@ -214,11 +214,11 @@ public class PlayListServiceImpl implements PlayListService{
        
 	}
 
-	@Override
-	public List<PlayListVideoDTO> getAllPlayListVideoAsDTO() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<PlayListVideoDTO> getAllPlayListVideoAsDTO() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	
 

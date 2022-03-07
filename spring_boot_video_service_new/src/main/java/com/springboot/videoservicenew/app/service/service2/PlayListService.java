@@ -20,5 +20,5 @@ public interface PlayListService {
    PlayListDTO convertEntityToDTO(PlayListModel playListModel);
    List<PlayListDTO> getAllPlayListsAsDTO();
    PlayListVideoDTO convertPlayListVideoToDTO(PlayListModel playListModel, VideoModel videoModel);
-   List<PlayListVideoDTO> getAllPlayListVideoAsDTO();
+   //List<PlayListVideoDTO> getAllPlayListVideoAsDTO();
 }

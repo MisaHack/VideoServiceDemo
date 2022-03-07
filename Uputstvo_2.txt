@@ -422,7 +422,21 @@ NIJE DOBRA PRAKSA DA AKO PISEMO JEDAN TEST DA EXTENDUJEMO NEKU DRUGU TEST KLASU 
 @AutoConfigureTestDatabase
 
 
+---------------------------------------------------
 
+kada radimo INTEGRATION TEST bitno je da vidimo da li se ono sto testiramo zaista izvrsilo
 
+kod hendovanja gresaka imamo dve vrste : internal server exception i busines exception
+
+internal server exception - nesto katastrofalno se desilo na strani servera, korisnik APIja nema uticaj na nju
+
+busines exception - kada imamo kolekciju od 5 elemenata a mi stavimo na 6tu, onda cemo dobiti Index out of bounds exception, onda moramo obavestiti korisnika APIja da je doslo do pogresnih ulaznih parametara
+
+sve putanje moraju da se pokriju TESTOVIMA kod IF-ELSE uslova u nasoj metodi, i da se vidi da li sve radi
+(ne treba da testiramo biblioteke koje koristimo, podrazumeva se da ih je neko testirao)
+
+INFO za Logove mozemo ostaviti u production logu
+
+---------------------------------------------------
 
 

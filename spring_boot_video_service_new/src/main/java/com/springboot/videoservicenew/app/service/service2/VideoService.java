@@ -14,4 +14,5 @@ public interface VideoService {
    VideoModel addCategoryToVideo(long video_id, long category_id);
    VideoDTO convertEntityToDTO(VideoModel videoModel);
    List<VideoDTO> getAllVideosAsDTO();
+   VideoModel findByVideoName(String video_name);
 }

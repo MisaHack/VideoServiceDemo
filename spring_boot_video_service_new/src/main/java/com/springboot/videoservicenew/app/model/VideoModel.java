@@ -58,8 +58,9 @@ public class VideoModel {
    //@Column(name = "category")
    //Set<Category> category = new HashSet<>();
    
-   public long getId() {
-	  return id;
+   public VideoModel(long id, String name){
+	  this.id=id;
+	  this.name=name;
    }
    
    @Override

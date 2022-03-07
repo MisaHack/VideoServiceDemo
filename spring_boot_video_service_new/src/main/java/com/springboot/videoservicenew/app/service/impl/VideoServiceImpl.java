@@ -120,4 +120,18 @@ public class VideoServiceImpl implements VideoService{
 	   return videosDTO;
 	   
 	}
+
+	//Service for Testing by Video name
+	@Override
+	public VideoModel findByVideoName(String video_name) {
+		// TODO Auto-generated method stub
+		Optional<VideoModel> video = videoRepository.findVideoByName(video_name);
+		
+	    if(video.isPresent()) {
+           return video.get(); 
+	    }
+		else {
+		   throw new ResourceNotFoundException("Video", "video_name", video_name); 
+ 	    }
+	}
 }
