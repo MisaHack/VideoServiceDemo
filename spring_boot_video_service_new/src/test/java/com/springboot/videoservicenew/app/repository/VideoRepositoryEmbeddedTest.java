@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import com.springboot.videoservicenew.app.model.VideoModel;
 
 @DataJpaTest
+@Transactional
 @ActiveProfiles("test")
 public class VideoRepositoryEmbeddedTest {
 
@@ -37,8 +40,13 @@ public class VideoRepositoryEmbeddedTest {
    //@Sql("{/test-data.sql}")
    @Sql("/test-data.sql")
    public void shouldSaveUserThroughSqlFile(){
+	   
+	  //given
 	  Optional<VideoModel> test = videoRepository.findVideoByName("Titanic");
 	  
+	  //when
+	  
+	  //then
 	  assertThat(test).isNotEmpty();
    }
    
