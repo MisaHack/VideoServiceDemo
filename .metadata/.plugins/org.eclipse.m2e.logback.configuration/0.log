@@ -17065,3 +17065,9 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.ve
 2022-03-08 12:17:55,152 [Worker-105: Launching sonar-configuration] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Misa\Documents\workspace-spring-tool-suite-4-4.13.1.RELEASE\spring_boot_video_service_new
 2022-03-08 12:17:55,152 [Worker-105: Launching sonar-configuration] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B sonar:sonar -Dstyle.color=always
 2022-03-08 12:19:58,757 [Worker-104: Launching sonar-configuration] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Misa\Documents\workspace-spring-tool-suite-4-4.13.1.RELEASE\spring_boot_video_service_new
+2022-03-08 12:19:58,757 [Worker-104: Launching sonar-configuration] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Dsonar.login=admin -Dsonar.password=3281475 -B sonar:sonar -Dstyle.color=always
+2022-03-08 16:45:59,634 [Worker-113: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-03-08 16:45:59,635 [Worker-113: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2022-03-08 16:45:59,645 [Worker-113: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2022-03-08 16:45:59,909 [Worker-113: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-03-08 16:45:59,913 [Worker-113: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.

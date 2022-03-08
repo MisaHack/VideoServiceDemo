@@ -441,7 +441,7 @@ INFO za Logove mozemo ostaviti u production logu
 
 Imena klasa trebaju da se zavrsavaju sa "Test", nije obavezno, ali stvar je konvencije i prakse
 
-kada pisemo upite za H2 bazu trebamo nazive kolona da stavimo pod jednostruke navodnike
+kada pisemo upite za H2 bazu trebamo nazive kolona da stavimo pod jednostruke navodnike - ovo je zbog toga da ne bi dolazilo do konflikta imena sa SQL ključnim rečima
 
 Maven kompajlira u ---> 
 ono sto se nalazi u Resource folderima on NE KOMPAJLIRA nego KOPIRA
@@ -459,4 +459,25 @@ TESTOVI ISTE VRSTE TREBAJU DA RADE SA ISTIM SETOM PODATAKA !
 MOJE ZAPAZANJE : PRI TESTIRANJU NE PRAVITI OBJEKAT SA PREDEFINISANIM 'ID'-om JER OBJEKAT KOJI JE SACUVAN I ONAJ KOJI VRATI POSTMAN NISU ISTI IAKO DELUJU ISTI ! ! !
 
 
+---------------------------------------------------
+
+private VideoRepository videoRepository;
+
+private boot saved = false;
+
+void setUp(){
+
+videoRepository = mock(VideoRepository.class);
+
+when(videoRepository.getById(anyLong())).thenReturn(video);
+
+when(categoryRepository.save(any())).thenReturn(video);
+
+when(categoryRepository.save(any())).thenReturn(video);
+
+when(categoryRepository.save(any())).thenAnswer(invocation -> {saved=truer ; return null})
+}
+
+mozemo da simuliramo DAO Layer na taj nacin, kada imamo manji broj objekata
+kada imamo veci broj objekata onda nam treba INTEGRATION test
 
