@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.repository.UserRepository"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.EmployeeModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.ChannelPlayListModel"/>
-    <fullyQualifiedTypeName name="lombok.extern.slf4j.Slf4j"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.ChannelModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.controller.PlayListController"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.PlayListModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.PlayListVideoModel"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.UserModel"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.VideoModel"/>
     <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
@@ -16,25 +8,20 @@
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
     <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.service.CategoryService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.CategoryModel"/>
     <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.CategoryModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.repository.CategoryRepository"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.PlayListVideoModelKey"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.PlayListModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.repository.VideoRepository"/>
     <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.PlayListVideoModel"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.ChannelPlayListModelKey"/>
@@ -49,7 +36,6 @@
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.ChannelPlayListModel"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.CategoryServiceImpl"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.dto.VideoDTO"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.VideoServiceImpl"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.PlayListServiceImpl"/>
@@ -58,6 +44,20 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.ChannelServiceImpl"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.dto.PlayListDTO"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.extension.ExtendWith"/>
+    <fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringJUnit4ClassRunner"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest"/>
+    <fullyQualifiedTypeName name="org.springframework.test.context.ActiveProfiles"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.repository.VideoRepository"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.VideoModel"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.CategoryModel"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.service2.CategoryService"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.CategoryServiceImpl"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.repository.CategoryRepository"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.AfterEach"/>
 </qualifiedTypeNameHistroy>
