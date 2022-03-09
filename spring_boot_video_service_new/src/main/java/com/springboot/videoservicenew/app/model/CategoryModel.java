@@ -45,4 +45,13 @@ public class CategoryModel {
    @ManyToMany(mappedBy = "categories_in_video")
    private Set<VideoModel> videos;
    
+   //dva konstruktora sam dodao za INTEGRATION test za PlayListControllerTest
+   public CategoryModel(String category_name){
+	  this.category_name = category_name; 
+   }
+   
+   public CategoryModel(){
+	   
+   }
+   
 }

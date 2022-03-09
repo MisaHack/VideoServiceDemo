@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.UserModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservice.app.model.VideoModel"/>
-    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
-    <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
-    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
-    <fullyQualifiedTypeName name="javax.persistence.Table"/>
-    <fullyQualifiedTypeName name="javax.persistence.Id"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="com.springboot.videoservice.app.exception.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
@@ -52,12 +45,19 @@
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.VideoModel"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.CategoryModel"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.service2.CategoryService"/>
-    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.CategoryServiceImpl"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.repository.CategoryRepository"/>
     <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.AfterEach"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.service2.CategoryService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.impl.CategoryServiceImpl"/>
+    <fullyQualifiedTypeName name="org.mockito.Mock"/>
+    <fullyQualifiedTypeName name="java.lang.AutoCloseable"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.service.CategoryServiceTest"/>
+    <fullyQualifiedTypeName name="org.mockito.MockitoAnnotations"/>
+    <fullyQualifiedTypeName name="com.springboot.videoservicenew.app.model.CategoryModel"/>
+    <fullyQualifiedTypeName name="org.mockito.ArgumentCaptor"/>
+    <fullyQualifiedTypeName name="java.util.Locale.Category"/>
 </qualifiedTypeNameHistroy>

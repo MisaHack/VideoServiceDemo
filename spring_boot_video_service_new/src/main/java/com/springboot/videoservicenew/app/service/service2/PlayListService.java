@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.springboot.videoservicenew.app.dto.PlayListDTO;
 import com.springboot.videoservicenew.app.dto.PlayListVideoDTO;
+import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.model.VideoModel;
 
@@ -21,4 +22,5 @@ public interface PlayListService {
    List<PlayListDTO> getAllPlayListsAsDTO();
    PlayListVideoDTO convertPlayListVideoToDTO(PlayListModel playListModel, VideoModel videoModel);
    //List<PlayListVideoDTO> getAllPlayListVideoAsDTO();
+   CategoryModel getCategoryFromPlayList(long play_list_id, long category_id);
 }

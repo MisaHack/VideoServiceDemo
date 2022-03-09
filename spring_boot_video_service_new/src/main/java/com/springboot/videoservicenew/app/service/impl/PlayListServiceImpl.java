@@ -3,6 +3,7 @@ package com.springboot.videoservicenew.app.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -116,6 +117,29 @@ public class PlayListServiceImpl implements PlayListService{
 	   
 	   playListRepository.save(existingPlayList);
 
+	}
+	
+	@Override
+	public CategoryModel getCategoryFromPlayList(long play_list_id, long category_id){
+	  
+	   //we need to check does Play List with the given id exist in DB or not	
+	   PlayListModel existingPlayList = playListRepository.findById(play_list_id).orElseThrow(() -> new ResourceNotFoundException("PlayList", "id", play_list_id));
+			   
+	   //we need to check does Category with the given id exist in DB or not
+	   CategoryModel existingCategory = categoryRepository.findById(category_id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", category_id));
+	   
+	   Set<CategoryModel> categories = existingPlayList.getCategories_in_playlist();
+	   
+	   CategoryModel categoryModel = null;
+	   
+	   for(CategoryModel category : categories){
+		  if(category.getId() == category_id){
+			 categoryModel = category;
+		  }
+	   }
+	   
+	   return categoryModel;
+	   
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.videoservicenew.app.dto.PlayListDTO;
+import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.service.service2.PlayListService;
 
@@ -119,4 +120,12 @@ public class PlayListController { //Controller depends on Service layer
 	   return playlistService.getAllPlayListsAsDTO();
 	   
 	}
+    
+	// build GET_CATEGORY_FROM_PLAY_LIST REST API, to GET category FROM Play List
+	// http://localhost:8080/api/playlists/1/category/1
+	// we use ResponseEntity as a return type
+    @GetMapping("/{play_list_id}/category/{category_id}")
+    public CategoryModel getCategoryFromPlayList(@PathVariable("play_list_id") long play_list_id, @PathVariable("category_id") long category_id) {
+       return playlistService.getCategoryFromPlayList(play_list_id, category_id);	
+    }
 }
