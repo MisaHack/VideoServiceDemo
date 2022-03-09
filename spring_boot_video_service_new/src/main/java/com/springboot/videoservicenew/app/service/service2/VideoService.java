@@ -12,7 +12,8 @@ public interface VideoService {
    VideoModel updateVideo(VideoModel video, long id);
    void deleteVideo(long id);
    VideoModel addCategoryToVideo(long video_id, long category_id);
-   VideoDTO convertEntityToDTO(VideoModel videoModel);
    List<VideoDTO> getAllVideosAsDTO();
    VideoModel findByVideoName(String video_name);
+   VideoDTO convertEntityToDTO(VideoModel videoModel);
+   VideoModel convertDTOToEntity(VideoDTO videoDTO);
 }

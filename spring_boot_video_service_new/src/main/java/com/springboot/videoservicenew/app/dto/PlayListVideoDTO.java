@@ -7,7 +7,15 @@ import lombok.Data;
 @Data
 public class PlayListVideoDTO {
 
-   private String play_list_name;
-   private List<String> video_name;
+   //by name Model Mapper know exactly which
+   //Model field to map to which DTO field automaticaly
+	
+   private String playListName;
+   private String videoName;
+   
+   private int playListOrderNumber;
+   private int videoOrderNumber;
+   
+   
    
 }

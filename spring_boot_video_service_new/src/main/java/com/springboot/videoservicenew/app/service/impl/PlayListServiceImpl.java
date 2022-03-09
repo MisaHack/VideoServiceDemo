@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservicenew.app.dto.PlayListDTO;
-import com.springboot.videoservicenew.app.dto.PlayListVideoDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
 import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
@@ -22,6 +22,9 @@ import com.springboot.videoservicenew.app.service.service2.PlayListService;
 @Service
 public class PlayListServiceImpl implements PlayListService{
 
+	//Mapping DTO to Entity, and vice versa
+	private ModelMapper mapper;
+	
 	private PlayListRepository playListRepository;
 	
 	private CategoryRepository categoryRepository;
@@ -197,15 +200,15 @@ public class PlayListServiceImpl implements PlayListService{
 	}
 
 	//Service for converting Play List Entity to Play List with less data
-	@Override
-	public PlayListDTO convertEntityToDTO(PlayListModel playListModel) {
-       
-	   PlayListDTO playListDTO = new PlayListDTO();
-	   
-	   playListDTO.setPlay_list_name(playListModel.getName());
-	   
-	   return playListDTO;
-	}
+//	@Override
+//	public PlayListDTO convertEntityToDTO(PlayListModel playListModel) {
+//       
+//	   PlayListDTO playListDTO = new PlayListDTO();
+//	   
+//	   playListDTO.setPlay_list_name(playListModel.getName());
+//	   
+//	   return playListDTO;
+//	}
 
 	@Override
 	public List<PlayListDTO> getAllPlayListsAsDTO() {
@@ -223,20 +226,20 @@ public class PlayListServiceImpl implements PlayListService{
 	   return playListsDTO;
 	}
 
-	@Override
-	public PlayListVideoDTO convertPlayListVideoToDTO(PlayListModel playListModel, VideoModel videoModel) {
-
-       PlayListVideoDTO playListVideoDTO = new PlayListVideoDTO();
-       
-       playListVideoDTO.setPlay_list_name(playListModel.getName());
-       
-       for(int i=0 ; i < videoModel.getPlayListVideo().size(); i++) {
-           playListVideoDTO.getVideo_name().add(videoModel.getName());
-       }
-       
-       return playListVideoDTO;
-       
-	}
+//	@Override
+//	public PlayListVideoDTO convertPlayListVideoToDTO(PlayListModel playListModel, VideoModel videoModel) {
+//
+//       PlayListVideoDTO playListVideoDTO = new PlayListVideoDTO();
+//       
+//       playListVideoDTO.setPlay_list_name(playListModel.getName());
+//       
+//       for(int i=0 ; i < videoModel.getPlayListVideo().size(); i++) {
+//           playListVideoDTO.getVideo_name().add(videoModel.getName());
+//       }
+//       
+//       return playListVideoDTO;
+//       
+//	}
 
 //	@Override
 //	public List<PlayListVideoDTO> getAllPlayListVideoAsDTO() {
@@ -244,6 +247,21 @@ public class PlayListServiceImpl implements PlayListService{
 //		return null;
 //	}
 	
+	//converting Entity to DTO
+	public PlayListDTO convertEntityToDTO(PlayListModel playListModel){
+	   
+		PlayListDTO playListDTO = mapper.map(playListModel, PlayListDTO.class);	
+	   
+	   return playListDTO;  
+	   
+	}
 	
-
+	//converting DTO to Entity
+	public PlayListModel convertDTOToEntity(PlayListDTO playListDTO){
+	   
+		PlayListModel playList = mapper.map(playListDTO, PlayListModel.class);
+	   
+	   return playList;
+	}
+	
 }

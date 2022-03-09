@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.springboot.videoservicenew.app.dto.CategoryDTO;
@@ -14,6 +15,9 @@ import com.springboot.videoservicenew.app.service.service2.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
+	
+	//Mapping DTO to Entity, and vice versa
+	private ModelMapper mapper;
 	
 	private CategoryRepository categoryRepository;
 
@@ -66,15 +70,33 @@ public class CategoryServiceImpl implements CategoryService{
 		
 	}
 	
-	//Service for convering Category Entity to Category with less data
+//	Service for convering Category Entity to Category with less data
+//  ----->>> THIS IS BAD WAY TO CONVERT, BETTER USE - MODEL MAPPER - INSTEAD !
+//	public CategoryDTO convertEntityToDTO(CategoryModel categoryModel){
+//	   
+//	   CategoryDTO categoryDTO = new CategoryDTO();
+//	   
+//	   categoryDTO.setCategory_name(categoryModel.getCategory_name());
+//	   
+//	   return categoryDTO;  
+//	   
+//	}
+	
+	//converting Entity to DTO
 	public CategoryDTO convertEntityToDTO(CategoryModel categoryModel){
 	   
-	   CategoryDTO categoryDTO = new CategoryDTO();
-	   
-	   categoryDTO.setCategory_name(categoryModel.getCategory_name());
+	   CategoryDTO categoryDTO = mapper.map(categoryModel, CategoryDTO.class);	
 	   
 	   return categoryDTO;  
 	   
+	}
+	
+	//converting DTO to Entity
+	public CategoryModel convertDTOToEntity(CategoryDTO categoryDTO){
+	   
+	   CategoryModel categoryModel = mapper.map(categoryDTO, CategoryModel.class);
+	   
+	   return categoryModel;
 	}
 	
 	//Return All Categories converted in DTO format

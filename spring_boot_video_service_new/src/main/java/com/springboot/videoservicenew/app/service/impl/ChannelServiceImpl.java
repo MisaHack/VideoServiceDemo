@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservicenew.app.dto.CategoryDTO;
 import com.springboot.videoservicenew.app.dto.ChannelDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
+import com.springboot.videoservicenew.app.model.CategoryModel;
 import com.springboot.videoservicenew.app.model.ChannelModel;
 import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.repository.ChannelRepository;
@@ -16,6 +19,9 @@ import com.springboot.videoservicenew.app.service.service2.ChannelService;
 
 @Service
 public class ChannelServiceImpl implements ChannelService{
+	
+	//Mapping DTO to Entity, and vice versa
+	private ModelMapper mapper;
 
 	private ChannelRepository channelRepository;
 	
@@ -103,14 +109,31 @@ public class ChannelServiceImpl implements ChannelService{
 		channelRepository.save(existingChannel);
 	}
 
-	@Override
-	public ChannelDTO convertEntityToDTO(ChannelModel channelModel) {
-	       
-	   ChannelDTO channelDTO = new ChannelDTO();
-	       
-	   channelDTO.setChannel_name(channelModel.getName());
+//	@Override
+//	public ChannelDTO convertEntityToDTO(ChannelModel channelModel) {
+//	       
+//	   ChannelDTO channelDTO = new ChannelDTO();
+//	       
+//	   channelDTO.setChannel_name(channelModel.getName());
+//	   
+//	   return channelDTO;
+//	}
+	
+	//converting Entity to DTO
+	public ChannelDTO convertEntityToDTO(ChannelModel channelModel){
 	   
-	   return channelDTO;
+		ChannelDTO channelDTO = mapper.map(channelModel, ChannelDTO.class);	
+	   
+	   return channelDTO;  
+	   
+	}
+	
+	//converting DTO to Entity
+	public ChannelModel convertDTOToEntity(ChannelDTO channelDTO){
+	   
+		ChannelModel channel = mapper.map(channelDTO, ChannelModel.class);
+	   
+	   return channel;
 	}
 
 	@Override
@@ -128,7 +151,5 @@ public class ChannelServiceImpl implements ChannelService{
        
        return channelsDTO;
 	}
-	
-	
 
 }

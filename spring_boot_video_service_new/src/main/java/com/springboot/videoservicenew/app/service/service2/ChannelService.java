@@ -13,7 +13,8 @@ public interface ChannelService {
    void deleteChannel(long id);
    ChannelModel addPlayListToChannel(long play_list_id,long channel_id);
    void removePlayListFromChannel(long play_list_id,long channel_id);
-   ChannelDTO convertEntityToDTO(ChannelModel channelModel);
    List<ChannelDTO> getAllChannelAsDTO();
+   ChannelDTO convertEntityToDTO(ChannelModel channelModel);
+   ChannelModel convertDTOToEntity(ChannelDTO channelDTO);
    
 }

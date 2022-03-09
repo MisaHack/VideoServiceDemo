@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.springboot.videoservicenew.app.dto.PlayListDTO;
 import com.springboot.videoservicenew.app.dto.VideoDTO;
 import com.springboot.videoservicenew.app.exception.ResourceNotFoundException;
 import com.springboot.videoservicenew.app.model.CategoryModel;
+import com.springboot.videoservicenew.app.model.PlayListModel;
 import com.springboot.videoservicenew.app.model.VideoModel;
 import com.springboot.videoservicenew.app.repository.CategoryRepository;
 import com.springboot.videoservicenew.app.repository.VideoRepository;
@@ -18,6 +21,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 public class VideoServiceImpl implements VideoService{
+	
+	//Mapping DTO to Entity, and vice versa
+	private ModelMapper mapper;
 
 	private VideoRepository videoRepository;
 	
@@ -94,15 +100,15 @@ public class VideoServiceImpl implements VideoService{
 	}
 
 	//Service for converting Video Entity to Video with less data
-	@Override
-	public VideoDTO convertEntityToDTO(VideoModel videoModel) {
-
-	   VideoDTO videoDTO = new VideoDTO();
-	   
-	   videoDTO.setVideo_name(videoModel.getName());
-	   
-	   return videoDTO;
-	}
+//	@Override
+//	public VideoDTO convertEntityToDTO(VideoModel videoModel) {
+//
+//	   VideoDTO videoDTO = new VideoDTO();
+//	   
+//	   videoDTO.setVideo_name(videoModel.getName());
+//	   
+//	   return videoDTO;
+//	}
 
 	@Override
 	public List<VideoDTO> getAllVideosAsDTO() {
@@ -133,5 +139,22 @@ public class VideoServiceImpl implements VideoService{
 		else {
 		   throw new ResourceNotFoundException("Video", "video_name", video_name); 
  	    }
+	}
+	
+	//converting Entity to DTO
+	public VideoDTO convertEntityToDTO(VideoModel videoModel){
+	   
+	   VideoDTO videoDTO = mapper.map(videoModel, VideoDTO.class);	
+	   
+	   return videoDTO;  
+	   
+	}
+	
+	//converting DTO to Entity
+	public VideoModel convertDTOToEntity(VideoDTO videoDTO){
+	   
+	   VideoModel video = mapper.map(videoDTO, VideoModel.class);
+	   
+	   return video;
 	}
 }

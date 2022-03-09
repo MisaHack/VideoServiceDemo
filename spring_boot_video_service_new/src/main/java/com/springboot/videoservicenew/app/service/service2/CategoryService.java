@@ -11,6 +11,8 @@ public interface CategoryService {
    CategoryModel getCategoryById(long id);
    CategoryModel updateCategory(CategoryModel category, long id);
    void deleteCategory(long id);
-   CategoryDTO convertEntityToDTO(CategoryModel categoryModel);
    List<CategoryDTO> getAllCategoriesAsDTO();
+   CategoryDTO convertEntityToDTO(CategoryModel categoryModel);
+   CategoryModel convertDTOToEntity(CategoryDTO categoryDTO);
+   
 }
