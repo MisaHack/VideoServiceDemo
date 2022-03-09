@@ -24,7 +24,7 @@ import com.springboot.videoservicenew.app.service.impl.CategoryServiceImpl;
 
 @DataJpaTest
 @Transactional // staviti obavezno na test klase, zbog toga da bi baza uvek bila cista
-public class CategoryServiceTest {
+public class CategoryServiceUnitTest {
 
 	//we know that Category Repository implementation really works
 	//so we can Mock its implementation

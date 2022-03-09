@@ -17,7 +17,7 @@ import com.springboot.videoservicenew.app.model.VideoModel;
 @DataJpaTest
 @Transactional
 @ActiveProfiles("test")
-public class VideoRepositoryEmbeddedTest {
+public class VideoRepositoryEmbeddedUnitTest {
 
    @Autowired
    private VideoRepository videoRepository;

@@ -1,6 +1,5 @@
 package com.springboot.videoservicenew.app.controller;
 
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.json.JSONException;
@@ -29,7 +28,7 @@ import com.springboot.videoservicenew.app.model.CategoryModel;
 //@SpringBootTest - says which application should we run, it is launching spring boot app
 //SpringBootTest.WebEnvironment.RANDOM_PORT - it makes dynamic port for integration testing
 @SpringBootTest(classes = SpringBootVideoServiceNewApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PlayListControllerTest {
+public class PlayListControllerIntegrationTest {
 
     //we autowire port here - so we can make URL
     @LocalServerPort
@@ -63,7 +62,7 @@ public class PlayListControllerTest {
     }
 
     @Test
-    public void addCategory(){
+    public void addCategoryToPlayList(){
 
         CategoryModel category = new CategoryModel("Action");
         
