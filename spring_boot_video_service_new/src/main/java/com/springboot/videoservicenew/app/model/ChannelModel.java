@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class ChannelModel {
    
    //fali PLAYLISTS - dodao sam ga 
    @JsonIgnore
-   @OneToMany(mappedBy = "channelModel", cascade = CascadeType.ALL, orphanRemoval = true)
+   @OneToMany(mappedBy = "channelModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
    Collection <ChannelPlayListModel> channelPlayLists = new ArrayList<>();
       
    //add PlayList to Channel

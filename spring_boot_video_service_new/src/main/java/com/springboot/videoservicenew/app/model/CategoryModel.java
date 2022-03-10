@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class CategoryModel {
    //ovim se povezujemo sa Playlist-om
    //@ManyToMany(mappedBy = "categories_in_playlist")
    @JsonIgnore
-   @ManyToMany
+   @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(
 	  name = "playlist_categories",
 	  joinColumns = @JoinColumn(name = "category_id"),
@@ -42,7 +43,7 @@ public class CategoryModel {
    private Set<PlayListModel> playLists;
    
    //ovim se povezujemo sa Videom
-   @ManyToMany(mappedBy = "categories_in_video")
+   @ManyToMany(mappedBy = "categories_in_video", fetch = FetchType.LAZY)
    private Set<VideoModel> videos;
    
    //dva konstruktora sam dodao za INTEGRATION test za PlayListControllerTest

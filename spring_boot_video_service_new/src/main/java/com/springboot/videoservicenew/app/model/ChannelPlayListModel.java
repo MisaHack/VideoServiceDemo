@@ -2,6 +2,7 @@ package com.springboot.videoservicenew.app.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -17,12 +18,12 @@ public class ChannelPlayListModel {
    @EmbeddedId
    private ChannelPlayListModelKey channelPlayListId;
    
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.LAZY)
    @MapsId("channelId")
    @JoinColumn(name = "channel_id")
    private ChannelModel channelModel;
    
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.LAZY)
    @MapsId("playListId")
    @JoinColumn(name = "playList_id")
    private PlayListModel playListModel_c;

@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class VideoModel {
    
    //svaki Video ima Kategoriju
    @JsonIgnore
-   @ManyToMany(cascade = CascadeType.ALL)
+   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinTable(
       name = "video_categories",
       joinColumns = @JoinColumn(name = "video_id"),
@@ -51,7 +52,7 @@ public class VideoModel {
    //ovde treba kolekcija PlayListVideo
    @JsonIgnore
    //@OneToMany(mappedBy = "videoModel", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
-   @OneToMany(mappedBy = "videoModel", cascade = CascadeType.ALL, orphanRemoval = true)
+   @OneToMany(mappedBy = "videoModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
    List<PlayListVideoModel> playListVideo = new ArrayList<>();
    
    //svaki video ima Kategoriju

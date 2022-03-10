@@ -481,3 +481,54 @@ when(categoryRepository.save(any())).thenAnswer(invocation -> {saved=truer ; ret
 mozemo da simuliramo DAO Layer na taj nacin, kada imamo manji broj objekata
 kada imamo veci broj objekata onda nam treba INTEGRATION test
 
+
+---------------------------------------------------
+09.03.2022.
+---------------------------------------------------
+
+//given 
+
+PlayListModel playListModel = new PlayListModel();
+playListModel.setName("test");
+
+
+NE TREBA PRETPOSTAVLJATI STA CEMO DA UZIMAMO IZ BAZE
+/api/playlists/ + playListModel.getId() + "/category/" + categoryModel.getId();
+
+ObjectMapper objectMapper = new ObjectMapper();
+try{
+objectMapper.readValue(response.getBody(), Map.class);
+responseModel.get("id")
+}
+catch(){
+}
+
+PUT metodi su najcesce VOID, ne vracamo objekat
+
+NIJE DOBRO DA SE VRACA ENTITY OBJEKAT
+
+PUT, POST, DELETE - objekte NE VRACAMO u KONTROLERU - NE TREBA RESPONSE ENTITY ! ! !
+
+ALI TREBA VRATITI DTO OBJEKAT KONVERTOVARN
+
+NE TREBA MAPIRATI NA NACIN NA KOJI SAM JA RADIO,KONVERZIJA ENTITY U DTO, IMA MAP_STRUCT i MODEL_MAPER
+
+DEPENDENCY dodamo MODEL MAPER ---> MODEL MAPER je jednostavniji, najcesce on prepozna 
+
+
+DODAMO CONFIGURATION KLASU U "Config" FAJL, INICIJALIZUJEMO MODEL MAPER, DODAMO GA KAO @Autowired u PlayListController
+
+KOD MODEL MAPER MORAJU BITI ISTA IMENA
+
+@PutMapping
+return  modelMapper.map(playList, playListDTO)
+
+AKO DODAJEMO KATEGORIJU U PLAY LISTU I MORAMO PROVERITI DA LI JE TA KATEGORIJA ZAISTA SADA U PLAY LISTI
+
+CILJ INTEGRATION TESTA JE DA PROVERIMO DA LI NESTO POSTOJI U BAZI
+
+KADA DODAJEMO NESTO STO SE SNIMA U BAZI CILJ JE DA PROVERIMO DA LI SE NALAZI U BAZI
+
+VIDIMO STA SE DESAVA SA H2 BAZOM, NEKADA MI SNIMIMO, ALI NIJE U BAZI - NA MY
+
+INTEGRATION TESTOVI SA H2 MOGU BITI PROBLEMATICNI IZ TOG RAZLOGA !

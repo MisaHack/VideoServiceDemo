@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.json.JSONException;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -28,6 +30,8 @@ import com.springboot.videoservicenew.app.model.CategoryModel;
 //@SpringBootTest - says which application should we run, it is launching spring boot app
 //SpringBootTest.WebEnvironment.RANDOM_PORT - it makes dynamic port for integration testing
 @SpringBootTest(classes = SpringBootVideoServiceNewApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//this annotation means that we work with in memory test database
+@AutoConfigureTestDatabase
 public class PlayListControllerIntegrationTest {
 
     //we autowire port here - so we can make URL
@@ -44,7 +48,8 @@ public class PlayListControllerIntegrationTest {
     }
 
     @Test
-    public void testRecieveVideoCategory() throws JSONException{
+    @DisplayName("Test do we get expected category from Play List.")
+    public void testRecievePlayListCategory() throws JSONException{
     	
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
@@ -62,6 +67,7 @@ public class PlayListControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Test is category added to the Play List")
     public void addCategoryToPlayList(){
 
         CategoryModel category = new CategoryModel("Action");

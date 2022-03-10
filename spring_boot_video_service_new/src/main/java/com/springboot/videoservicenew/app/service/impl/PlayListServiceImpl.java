@@ -253,7 +253,6 @@ public class PlayListServiceImpl implements PlayListService{
 		PlayListDTO playListDTO = mapper.map(playListModel, PlayListDTO.class);	
 	   
 	   return playListDTO;  
-	   
 	}
 	
 	//converting DTO to Entity

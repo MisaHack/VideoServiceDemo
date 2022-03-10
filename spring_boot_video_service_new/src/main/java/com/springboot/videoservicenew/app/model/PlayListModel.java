@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class PlayListModel {
    //svaka PlayLista ima Kategoriju
    //@Column(name = "category")
    @JsonIgnore
-   @ManyToMany
+   @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(
 	  name = "playlist_categories",
 	  joinColumns = @JoinColumn(name = "playList_id"),
@@ -53,7 +54,7 @@ public class PlayListModel {
    //fali VIDEOS - dodat je na ovaj nacin
    @JsonIgnore
    //@OneToMany(mappedBy = "playListModel", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
-   @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL, orphanRemoval = true)
+   @OneToMany(mappedBy = "playListModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
    //, orphanRemoval = true
    //@OrphanRemoval
    List<PlayListVideoModel> playListVideos = new ArrayList<>();
@@ -63,7 +64,7 @@ public class PlayListModel {
    
    //ovo je konekcija za Channel na Playlistu
    @JsonIgnore
-   @OneToMany(mappedBy = "playListModel_c", cascade = CascadeType.ALL, orphanRemoval = true)   
+   @OneToMany(mappedBy = "playListModel_c", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)   
    List<ChannelPlayListModel> channelPlayLists = new ArrayList<>();
    
    //ove metode add i remove sam isto naknadno dodao
