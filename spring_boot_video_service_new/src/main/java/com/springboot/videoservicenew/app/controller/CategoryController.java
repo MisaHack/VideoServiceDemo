@@ -27,6 +27,7 @@ public class CategoryController { // Controller depends on Service layer
 	@Autowired
 	private CategoryService categoryService;
 
+	//we use constructor injection here, same as in Service
 	public CategoryController(CategoryService categoryService) {
 		super();
 		this.categoryService = categoryService;

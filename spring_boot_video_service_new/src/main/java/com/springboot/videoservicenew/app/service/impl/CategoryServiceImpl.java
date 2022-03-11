@@ -21,6 +21,7 @@ public class CategoryServiceImpl implements CategoryService{
 	
 	private CategoryRepository categoryRepository;
 
+	//we are using constructor injection
 	public CategoryServiceImpl(CategoryRepository categoryRepository) {
 		this.categoryRepository = categoryRepository;
 	}
