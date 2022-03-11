@@ -1,5 +1,7 @@
 package com.springboot.videoservicenew.app.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,11 @@ public class CategoryController { // Controller depends on Service layer
 	public CategoryController(CategoryService categoryService) {
 		super();
 		this.categoryService = categoryService;
+	}
+
+	@GetMapping("/datetime")
+	public String welcomePage(){
+	   return "Welcome to Video Service app ! Current date and time on server is : " + LocalDateTime.now();
 	}
 
 	// build CREATE Category REST API

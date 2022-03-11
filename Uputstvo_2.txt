@@ -532,3 +532,86 @@ KADA DODAJEMO NESTO STO SE SNIMA U BAZI CILJ JE DA PROVERIMO DA LI SE NALAZI U B
 VIDIMO STA SE DESAVA SA H2 BAZOM, NEKADA MI SNIMIMO, ALI NIJE U BAZI - NA MY
 
 INTEGRATION TESTOVI SA H2 MOGU BITI PROBLEMATICNI IZ TOG RAZLOGA !
+
+---------------------------------------------------
+10.03.2022.
+---------------------------------------------------
+
+Stefan : "Inace modelmaper je laksi za koriscenje, ali je sporiji dosta od mapstruct-a. Pa cisto i to da imate u vidu."
+
+Branimir radi na projektu za Axiom - zove se e-protokol
+
+Za testiranje se koristi : Docker (dock file)
+
+Testiranje na - MySQL serveru :
+
+- služi za izolaciju okruženja npr. za jedan deo nam treba MySQL5 a za drugi MySQL8,
+bez instalacije, povlači se image sa repositorijuma, bez brljanja po našem fajl sistemu,
+može da kreira virtuelno okruženje, i možemo napraviti image svoj i svoje okruženje i gurnuti ga na Amazon Web Services, ili bilo koji kontejner na cloud-u, što znači da ako neko ko radi na windowsu a neko drugi na Linuxu, ovaj sa linuxa može da gurne projekat na Docker a ovi sa Windowsa ga mogu preuzeti i pokrenuti bez problema i posebnih podešavanja
+
+- Generisanje Dokumentacije za RestAPI
+
+- Gradle - koristi Groovy jezik za opis Build-a (ima plug-inove kao u Maven-u)
+
+- Run Time Plugin - se koristi da bismo mogli pokrenuti projekat na mašini koja nema instaliranu Java Virtuelnu mašinu
+
+- Od Java 9 , ne moramo imati ceo ceo Java Development Kit, time postižemo da aplikacija bude značajno manja
+
+- Folder "Image" (134MB) - Aplikacija zauzima 80MB + Runtime Environment(54MB) - izbacivanjem nepotrebnih stvari iz JDK-a, smanjili smo Runtime Environment 6 puta
+
+- Taj "Image" je dovoljan da ga iskopiramo i damo nekome - dakle možemo ga distribuirati i kod će raditi bez problema kod korisnika
+
+- LAUNCH4J - Generiše .Exe fajl za Windows (valjda)
+
+- To je način da se ta aplikacija dalje distribuira kada se Build-uje
+
+- Struktura projekta :
+
+|----> com.axiomq.eprotocol
+   |---------> u osnovnom folderu samo glavni program
+   |---------> COMMON
+   |---------> CONFIG
+         |----------------> DEV
+                  |-------------------------> AsyncConfig
+                  |-------------------------> AnalysisConfig
+                  |-------------------------> BeanConfig
+                  |-------------------------> DocsConfig
+|---------> DAO
+|---------> DOMAIN
+   |----------------> BASE
+         |-------------------------> BaseEntity
+         |-------------------------> BaseEntityAudit
+   |----------------> COMMON
+   |----------------> DTO
+   |----------------> ENTITY
+|---------> EXCEPTION
+|---------> SECURITY
+|---------> SERVICES
+|---------> UTIL
+|---------> VALIDATORS
+|---------> WEB
+|---------> CONTROLLERS
+
+- QueryDSL - upite možemo tu izdvojiti, on se implementira dodatno uz JPARepository
+
+- @Version - se koristi za praćenje koliko puta je neki objekat modifikovan
+
+- Na relaciju staviti : 
+1) FetchType.LAZY - učitava po potrebi
+2) orphan_removal=true - ako nema relacija briše se iz tabele
+3) CascadeType.ALL - šta god se promeni na jednoj strani relacije biće projektovano na ostatak
+
+- Sa @Get - Ne vraćamo Entity objekte već DTO objekte, to je zbog toga da bismo klijentu vraćali uvek samo one informacije koje nam trebaju i da ne bismo uzimali iz baze podataka suvišne podatke tj. nećemo praviti dodatne nepotrebne upite ka bazi
+
+- Model Maper - pri izvršavanju koristi refleksiju da proveri da li su isti na obe strane
+
+- primenjujemo SOFT DELETE - u bazi 
+
+- QUERY DSL REPOSITORY - kroz Javu definišemo "WHERE" deo SQL upita, zato je vrlo zgodan
+
+- @Valid - to je anotacija za proveru (npr. da li su podaci u nekom zadatom opsegu, recimo datumi)
+
+
+---------------------------------------------------
+
+---------------------------------------------------

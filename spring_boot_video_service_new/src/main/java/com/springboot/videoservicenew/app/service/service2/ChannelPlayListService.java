@@ -1,4 +1,4 @@
-package com.springboot.videoservicenew.app.service.impl;
+package com.springboot.videoservicenew.app.service.service2;
 
 import java.util.List;
 

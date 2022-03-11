@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.videoservicenew.app.model.ChannelPlayListModel;
-import com.springboot.videoservicenew.app.service.impl.ChannelPlayListService;
+import com.springboot.videoservicenew.app.service.service2.ChannelPlayListService;
 
 @RestController
 @RequestMapping("/api/channelPlayLists")
