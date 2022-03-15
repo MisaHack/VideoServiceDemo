@@ -109,15 +109,28 @@ public class PlayListModel {
        return Objects.hashCode(id);
    }
 
-   @Override
-   public boolean equals(Object obj) {
-       if (this == obj)
-           return true;
-       if (obj == null)
-           return false;
-       if (getClass() != obj.getClass())
-           return false;
-       PlayListModel other = (PlayListModel) obj;
-       return Objects.equals(id, other.getId());
+//   @Override
+//   public boolean equals(Object obj) {
+//       if (this == obj)
+//           return true;
+//       if (obj == null)
+//           return false;
+//       if (getClass() != obj.getClass())
+//           return false;
+//       PlayListModel other = (PlayListModel) obj;
+//       return Objects.equals(id, other.getId());
+//   }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayListModel that = (PlayListModel) o;
+        return getId() == that.getId() && getOrderNumber() == that.getOrderNumber() && getName().equals(that.getName());
+    }
+
+    public PlayListModel(String name, int orderNumber){
+      this.name = name;
+      this.orderNumber = orderNumber;
    }
 }
