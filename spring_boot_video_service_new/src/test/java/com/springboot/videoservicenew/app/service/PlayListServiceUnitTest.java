@@ -43,6 +43,8 @@ public class PlayListServiceUnitTest
         //given
         PlayListModel playListModel = new PlayListModel("RockMusic",1);
 
+        //when method save() inside playListRepositoryMock is called we add
+        //functionality to it for returning new PlayListModel
         when(this.playListRepositoryMock.save(playListModel)).thenReturn(new PlayListModel("RockMusic",1));
 
         PlayListModel expectedPlayList = new PlayListModel("RockMusic",1);
@@ -57,5 +59,17 @@ public class PlayListServiceUnitTest
         assertEquals(actualModel, expectedPlayList);
         //assertTrue(expectedPlayList.equals(actualModel));
         //verify(playListRepositoryMock, times(1)).save(playListModel);
+    }
+
+    void shouldReturnAllPlayLists(){
+        //given
+        PlayListModel playListModel1 = new PlayListModel("RockMusic",1);
+        PlayListModel playListModel2 = new PlayListModel("TechnoMusic",2);
+        PlayListModel playListModel3 = new PlayListModel("CoolMusic",3);
+
+        //when
+
+
+        //then
     }
 }
