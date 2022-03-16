@@ -10,6 +10,7 @@ public class VideoServiceAppController {
 
 	@GetMapping("/")
 	//@GetMapping
+
 	public String showHome(){
 		
 		return "home";
