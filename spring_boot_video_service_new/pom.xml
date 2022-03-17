@@ -111,6 +111,12 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>5.6.2</version>
 		</dependency>
+		<!-- Add tomcat-ember-jasper to render JSP pages -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<version>9.0.44</version>
+		</dependency>
 
 	</dependencies>
 	<build>

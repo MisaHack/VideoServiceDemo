@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -21,24 +19,26 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
         UserBuilder users = User.withDefaultPasswordEncoder();
 
         auth.inMemoryAuthentication()
-                .withUser(users.username("john").password("test123").roles("EMPLOYEE"))
-                .withUser(users.username("mary").password("test123").roles("MANAGER"))
-                .withUser(users.username("susan").password("test123").roles("ADMIN"));
+                .withUser(users.username("misa").password("test123").roles("EMPLOYEE"))
+                .withUser(users.username("stefan").password("test123").roles("MANAGER"))
+                .withUser(users.username("zoran").password("test123").roles("ADMIN"));
     }
 
     //modifying Spring Security Configuration
     //configuration for Login and Logout
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
+        //http.authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests().
+                antMatchers("/").hasRole("EMPLOYEE")
+                .antMatchers("/leaders/**").hasRole("MANAGER")
+                .antMatchers("/systems/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
                 .permitAll()
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");
     }
-
-
-
-
 }
