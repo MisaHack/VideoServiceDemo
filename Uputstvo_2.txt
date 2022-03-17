@@ -613,5 +613,73 @@ može da kreira virtuelno okruženje, i možemo napraviti image svoj i svoje okr
 
 
 ---------------------------------------------------
+14.03.2022.
+---------------------------------------------------
+
+PRESTO DB - potencijalni klijent
+
+projekat zapoceo Facebook pre 10 godina, ali je open source, projekat je ogroman, videcemo koja ce biti nasa uloga u sistemu
 
 ---------------------------------------------------
+15.03.2022.
+---------------------------------------------------
+
+Spring Security
+
+ovo do sada je sve otvoreno
+
+svaki deo aplikacije zahteva prijavu, i svakom delu aplikacije je moguce dodati razlicite ucesnike/uloge
+
+dependency : SpringBoot Start Security
+
+
+treba da konfigurisemo kako ce se korisnik prijavljivati
+
+@Configuration
+@EnableWebSecurity
+public class BasicConfiguration extends WebSecurityConfigurationAdapter{
+
+
+}
+
+
+WebSecurityConfigureAdapter - podrazumevani adapter
+
+SpringBoot - NEMA POJMA O USER SESIJI NITI JE ODRZAVA
+
+Autentifikacija - prijava sa korisnickim imenom i lozinkom
+Autorizacija - pristup serverskim resursima
+
+svaki request ka nasem serveru prolazi kroz filtere,
+tako da se napravi neko uobicajeno ponasanje
+
+isto tako request kada napusta server isto prolazi kroz niz filtera
+
+
+ContextHolder - generalno je okruzenje u kome se izvrsava nas kod i koji ima neka svoja stanja
+
+SecurityContextHolder - Objekat koji sadrzi stanje Security-ja
+
+na osnovu tokena mozemo naci korisnika u nasoj bazi
+
+Java Web Token (korisnik, vreme kreiranja, vreme isteka)
+
+Token mozemo presresti. Kada je token istekao moze da se obnovi.
+
+Za svaku rutu je zalepljena Uloga korisnika aplikacije, korisnik mora biti ulogovan
+
+Spring zahteva da se definisu neke Uloge, bitno je da postoji Uloga u bazi podataka, u svakoj poslovnoj aplikaciji postoje ovakva ogranicenja, SpringBoot nudi vise nacina za definisanje uloga
+
+
+---------------------------------------------------
+16.03.2022.
+---------------------------------------------------
+
+napraviti log-in funkciju sa filterom, zastiti rute
+
+moze se hendlovati request kroz kontroler ili filter
+
+---------------------------------------------------
+.03.2022.
+---------------------------------------------------
+

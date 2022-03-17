@@ -45,7 +45,7 @@ public class PlayListServiceUnitTest
 
         //when method save() inside playListRepositoryMock is called we add
         //functionality to it for returning new PlayListModel
-        when(this.playListRepositoryMock.save(playListModel)).thenReturn(new PlayListModel("RockMusic",1));
+        when(this.playListRepositoryMock.save(playListModel)).thenReturn(new PlayListModel("RockMusic",2));
 
         PlayListModel expectedPlayList = new PlayListModel("RockMusic",1);
 
@@ -53,6 +53,7 @@ public class PlayListServiceUnitTest
         PlayListModel actualModel = playListService.savePlayList(playListModel);
 
         //then
+        //assertThrows(new Exception());
         assertNotNull(actualModel);
         assertEquals("RockMusic",actualModel.getName());
         assertEquals(1, actualModel.getOrderNumber());

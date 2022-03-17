@@ -27,11 +27,18 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     //modifying Spring Security Configuration
+    //configuration for Login and Logout
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().authenticated()
                 .and().formLogin().loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
-                .permitAll();
+                .permitAll()
+                .and()
+                .logout().permitAll();
     }
+
+
+
+
 }

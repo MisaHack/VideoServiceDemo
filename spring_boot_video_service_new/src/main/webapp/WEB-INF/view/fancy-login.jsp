@@ -2,14 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
-                        <html>
-                            <head>
-                                <meta charset='utf-8'>
-                                <meta name='viewport' content='width=device-width, initial-scale=1'>
-                                <title>Snippet - GoSNippets</title>
-                                <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
-                                <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
-                                <style>@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Snippet - GoSNippets</title>
+<link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+<link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+<style>@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
 
 * {
     padding: 0;
@@ -184,27 +184,38 @@ a:hover {
         font-size: 0.95rem
     }
 }</style>
-                                <script type='text/javascript' src=''></script>
-                                <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
-                            </head>
-                            <body oncontextmenu='return false' class='snippet-body'>
-                            <div class="wrapper bg-white">
+<script type='text/javascript' src=''></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+</head>
+<body oncontextmenu='return false' class='snippet-body'>
+<div class="wrapper bg-white">
     <div class="h4 text-muted text-center pt-2">Enter your login details</div>
-    <form class="pt-3">
+    <form:form action="${pageContext.request.contextPath}/authenticateTheUser" method="POST" class="pt-3">
+
+        <!-- Check for login error -->
+        <c:if test="${param.error != null}">
+           <div class="failed">Sorry! You entered invalid username/password.</i>
+        </c:if>
+        <!-- Check for logout -->
+        <c:if test="${param.logout != null}">
+           <div class="logout">You have been logged out.</i>
+        </c:if>
         <div class="form-group py-2">
-            <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" placeholder="Username or Email Address" required class=""> </div>
+            <div class="input-field"> <span class="far fa-user p-2"></span>
+            <input type="text" name="username" placeholder="Username or Email Address" required class="">
+            </div>
         </div>
         <div class="form-group py-1 pb-2">
-            <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="text" placeholder="Enter your Password" required class=""> <button class="btn bg-white text-muted"> <span class="far fa-eye-slash"></span> </button> </div>
+            <div class="input-field"> <span class="fas fa-lock p-2"></span>
+            <input type="text" name="password" placeholder="Enter your Password" required class="">
+            <button class="btn bg-white text-muted">
+            <span class="far fa-eye-slash"></span>
+            </button>
+            </div>
         </div>
-        <div class="d-flex align-items-start">
-            <div class="remember"> <label class="option text-muted"> Remember me <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-            <div class="ml-auto"> <a href="#" id="forgot">Forgot Password?</a> </div>
-        </div> <button class="btn btn-block text-center my-3">Log in</button>
-        <div class="text-center pt-3 text-muted">Not a member? <a href="#">Sign up</a></div>
-    </form>
+    </form:form>
 </div>
-                            <script type='text/javascript'></script>
-                            </body>
-                        </html>
+<script type='text/javascript'></script>
+</body>
+</html>
