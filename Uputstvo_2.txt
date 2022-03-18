@@ -680,6 +680,33 @@ napraviti log-in funkciju sa filterom, zastiti rute
 moze se hendlovati request kroz kontroler ili filter
 
 ---------------------------------------------------
-.03.2022.
+17.03.2022.
 ---------------------------------------------------
+U resources se nalazi :
+
+/static, /public, /webinf
+
+
+JSP se kompajlira u run time, tomcat je kompajlira u servlete,
+JSP/servleti su se pojavili pre 20ak godina, bili su korisceni za prve web servise,
+PHP u runtime interpretira web stranicu, 
+kada se JSP prvi put pokrene onda se koristi kao Java objekat
+
+JSP mora da se konfigurise u startnoj aplikaciji, da bi se koristio
+
+extends SpringBottServletInitializer
+
+@Override
+
+Sa JSP koristimo Session Cookie, koji server posalje browseru,
+kod cistog servera koji je stateless
+
+PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+password(passwordEncoder.encode("test123")).roles();
+
+Password Encoder u konfiguraciji inicijalizovati kao Bean
+
+
+
 

@@ -26,17 +26,23 @@
 
    <hr>
 
-   <!-- Add a link to point to /leaders ... this is for the Managers-->
-   <p>
-      <a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
-      (Only for Manager people)
-   </p>
+   <!-- With security:authorize we hide features from other roles-->
+   <security:authorize access="hasRole('MANAGER')">
+      <!-- Add a link to point to /leaders ... this is for the Managers-->
+      <p>
+         <a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
+         (Only for Manager people)
+      </p>
+   </security:authorize>
 
-   <!-- Add a link to point to /systems ... this is for the Admins-->
-   <p>
-      <a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
-      (Only for Admin people)
-   </p>
+   <!-- With security:authorize we hide features from other roles-->
+   <security:authorize access="hasRole('ADMIN')">
+      <!-- Add a link to point to /systems ... this is for the Admins-->
+      <p>
+         <a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
+         (Only for Admin people)
+      </p>
+   </security:authorize>
 
    <hr>
 

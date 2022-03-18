@@ -20,8 +20,8 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
 
         auth.inMemoryAuthentication()
                 .withUser(users.username("misa").password("test123").roles("EMPLOYEE"))
-                .withUser(users.username("stefan").password("test123").roles("MANAGER"))
-                .withUser(users.username("zoran").password("test123").roles("ADMIN"));
+                .withUser(users.username("stefan").password("test123").roles("EMPLOYEE","MANAGER"))
+                .withUser(users.username("zoran").password("test123").roles("EMPLOYEE","ADMIN"));
     }
 
     //modifying Spring Security Configuration
