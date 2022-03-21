@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <title>Category Directory</title>
+</head>
+
+<body>
+
+   <h3>Employee Directory</h3>
+   <hr>
+
+   <table border="1">
+       <thead>
+          <tr>
+              <th>Category Name</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr th:each="tempCategory : ${categories}}">
+             <td th:text="${tempCategory.category_name}}"/>
+          </tr>
+       </tbody>
+
+   </table>
+
+</body>
+
+</html>

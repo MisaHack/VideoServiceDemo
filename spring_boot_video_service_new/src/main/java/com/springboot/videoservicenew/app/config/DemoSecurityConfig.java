@@ -11,10 +11,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -36,6 +39,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private DataSource dataSource;
 
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        auth.jdbcAuthentication().dataSource(dataSource);
     }
@@ -59,10 +63,21 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
                 .exceptionHandling().accessDeniedPage("/access-denied");
     }
 
-    @Bean
+/*    @Bean
     public PasswordEncoder getPasswordEncoder(){
        //return NoOpPasswordEncoder.getInstance();
-        return new BCryptPasswordEncoder();
+       return new BCryptPasswordEncoder();
+        //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
+    }*/
+
+    @Bean
+    public PasswordEncoder delegatingPasswordEncoder() {
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put("bcrypt", new BCryptPasswordEncoder());
+        DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("bcrypt", encoders);
+        passwordEncoder.setDefaultPasswordEncoderForMatches(new BCryptPasswordEncoder());
+        return passwordEncoder;
     }
+
 }
