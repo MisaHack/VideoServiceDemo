@@ -9,5 +9,5 @@ import java.util.List;
 public interface ChannelPlayListRepository extends JpaRepository<ChannelPlayListModel, Long>{
 
     //add a method to sort by order_number
-    public List<ChannelModel> findAllByOrderByOrderNumberAsc();
+    //public List<ChannelModel> findAllByOrderByOrderNumberAsc();
 }

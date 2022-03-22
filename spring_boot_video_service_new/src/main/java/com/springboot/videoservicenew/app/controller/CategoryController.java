@@ -23,7 +23,6 @@ public class CategoryController { // Controller depends on Service layer
 
 	//we use constructor injection here, same as in Service
 	public CategoryController(CategoryService categoryService) {
-		super();
 		this.categoryService = categoryService;
 	}
 
@@ -102,13 +101,39 @@ public class CategoryController { // Controller depends on Service layer
 	}
 
 	@PostMapping("/save")
-	public String saveCategory(@ModelAttribute("category") CategoryModel category){
+	public String saveCategoryThymeleaf(@ModelAttribute("category") CategoryModel category){
 
 		// save the category
         categoryService.saveCategory(category);
 
 		// use a redirect to prevent duplicate submisions
-		return "redirect:/categories/list"
+		return "redirect:/categories/list";
 	}
+
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("categoryId") int id, Model theModel){
+
+		//get the Category from the service
+        CategoryModel category = categoryService.getCategoryById(id);
+
+		//set category as a model attribute to pre-populate the form
+        theModel.addAttribute("category", category);
+
+		//send over to our form
+		return "categories/category-form";
+	}
+
+	@GetMapping("/delete")
+	public String delete(@RequestParam("categoryId") int id){
+
+		// delete the category
+		categoryService.deleteCategory(id);
+
+		// redirect to /categories/list
+		return "redirect:/categories/list";
+
+	}
+
+
 
 }
