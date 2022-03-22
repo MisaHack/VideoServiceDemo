@@ -707,6 +707,32 @@ password(passwordEncoder.encode("test123")).roles();
 
 Password Encoder u konfiguraciji inicijalizovati kao Bean
 
+---------------------------------------------------
+18.03.2022.
+---------------------------------------------------
 
 
+UserDetailsService = springov interfejs koji govori kako se kreira user
+
+UserDetails loadUserByUsername inmplements UserDetailsService(){}
+
+ono moje promenuti iz predefinisanih imena,passworda i role, u nesto sa konstruktorom, i u UserDetails loadUserByUsername ubaciti Role
+
+to radimo ako ce biti u bazi podataka, ne u memoriji
+
+filteri sluze za obradu requesta i response
+
+JWT token - zgodan je zbog toga sto je prenosiv
+
+Web aplikacija - 
+
+---------------------------------------------------
+21.03.2022.
+---------------------------------------------------
+
+nista specijano nismo pisali, samo nam je rekao da do Srede-Cetvrtka zaokruzimo projekat
+
+---------------------------------------------------
+22.03.2022.
+---------------------------------------------------
 

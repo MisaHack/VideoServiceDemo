@@ -118,10 +118,14 @@
 			<version>9.0.44</version>
 		</dependency>
 		<!-- Add Thymeleaf support-->
+
+		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+
+		-->
 	</dependencies>
 	<build>
 		<plugins>

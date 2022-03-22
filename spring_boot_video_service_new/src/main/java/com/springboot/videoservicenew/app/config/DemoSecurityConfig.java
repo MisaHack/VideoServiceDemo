@@ -23,7 +23,7 @@ import java.util.Map;
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
 
-/*    @Override
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 
         //add our users for in memory authentication
@@ -33,8 +33,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
                 .withUser(users.username("misa").password("test123").roles("EMPLOYEE"))
                 .withUser(users.username("stefan").password("test123").roles("EMPLOYEE","MANAGER"))
                 .withUser(users.username("zoran").password("test123").roles("EMPLOYEE","ADMIN"));
-    }*/
+    }
 
+    /*
     //we added H2 database support
     @Autowired
     private DataSource dataSource;
@@ -42,7 +43,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        auth.jdbcAuthentication().dataSource(dataSource);
-    }
+    }*/
 
 
     //modifying Spring Security Configuration
@@ -52,8 +53,8 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
         //http.authorizeRequests().anyRequest().authenticated()
         http.authorizeRequests().
                 antMatchers("/").hasRole("EMPLOYEE")
-                .antMatchers("/leaders/**").hasAnyRole("EMPLOYEE","MANAGER")
-                .antMatchers("/systems/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .antMatchers("/leaders/**").hasRole("MANAGER")
+                .antMatchers("/systems/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
                 .permitAll()
@@ -71,6 +72,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
 
     }*/
 
+    /*
     @Bean
     public PasswordEncoder delegatingPasswordEncoder() {
         Map<String, PasswordEncoder> encoders = new HashMap<>();
@@ -78,6 +80,6 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
         DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("bcrypt", encoders);
         passwordEncoder.setDefaultPasswordEncoderForMatches(new BCryptPasswordEncoder());
         return passwordEncoder;
-    }
+    }*/
 
 }
