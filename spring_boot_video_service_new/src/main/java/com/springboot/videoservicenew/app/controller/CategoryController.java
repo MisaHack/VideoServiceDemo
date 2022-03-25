@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,8 @@ public class CategoryController { // Controller depends on Service layer
 	}
 
 	// build CREATE Category REST API
+	@Operation(summary = "Save Category", tags = "Get")
+	@ApiResponses(value = { @ApiResponse( responseCode = "200", description = "Saved the Category")})
 	@PostMapping
 	public ResponseEntity<CategoryModel> saveCategory(@RequestBody CategoryModel category){
 	   return new ResponseEntity<CategoryModel>(categoryService.saveCategory(category), HttpStatus.CREATED);	

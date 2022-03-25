@@ -778,3 +778,37 @@ sutra cemo pricati kako generisati Swagger dokumentaciju za nas API
 
 POSTMAN - je REST API klijent
 
+
+---------------------------------------------------
+25.03.2022.
+---------------------------------------------------
+
+SWAGGER - biblioteka za generisanje API dokumentacije
+
+postoji dependency za njega, kao i za sve ostalo
+
+@Tag(name = "Project Controller", description...) <--- na nivou Kontrolera
+
+@Schema(example = "2021-10-31") - u principu je dobro da postoje Example
+
+@Schema(description = "demo")
+
+ako nesto formatiramo, nije zgoreg ni da napisemo u kom formatu ce korisnik to dobiti u 'example'
+
+ako nismo zadali format datuma recimo, najcesce ce biti vraceni u formi objekta !
+
+ne koristimo Spring Fox vec SPRING DOC ! !
+
+SPRING FOX JE PROBLEMATICAN !
+
+org.springdoc
+
+   <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.6.6</version>
+   </dependency>
+
+springdoc:
+   swagger-ui:
+      enabled: false; <---- ako zelimo da ugasimo pristup swagger-ui-u

@@ -60,10 +60,15 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
 
         //http.authorizeRequests().anyRequest().authenticated()
         http.authorizeRequests().
-                antMatchers("/").hasRole("EMPLOYEE")
+                antMatchers("/api/categories/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/v3/api-docs/**").permitAll()
+                .antMatchers("/v3/api-docs.yaml").permitAll()
+                .antMatchers("/api/v3/api-docs/**").permitAll()
+                .antMatchers("/").hasRole("EMPLOYEE")
                 .antMatchers("/leaders/**").hasRole("MANAGER")
                 .antMatchers("/systems/**").hasRole("ADMIN")
-                //.antMatchers("/api/categories/**").hasRole("EMPLOYEE")
                 .and().formLogin().loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
                 .permitAll()
