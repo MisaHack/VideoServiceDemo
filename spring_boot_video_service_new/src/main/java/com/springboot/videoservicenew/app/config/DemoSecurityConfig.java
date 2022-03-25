@@ -19,6 +19,8 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+
 @Configuration
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
@@ -50,11 +52,18 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
     //configuration for Login and Logout
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.headers().frameOptions().disable();
+        //http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
+        //http.authorizeRequests().antMatchers("/api/categories/**").permitAll();
+        //http.authorizeRequests().antMatchers("/**").permitAll();
+
         //http.authorizeRequests().anyRequest().authenticated()
         http.authorizeRequests().
                 antMatchers("/").hasRole("EMPLOYEE")
                 .antMatchers("/leaders/**").hasRole("MANAGER")
                 .antMatchers("/systems/**").hasRole("ADMIN")
+                //.antMatchers("/api/categories/**").hasRole("EMPLOYEE")
                 .and().formLogin().loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
                 .permitAll()
@@ -64,7 +73,14 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter{
                 .exceptionHandling().accessDeniedPage("/access-denied");
     }
 
-/*    @Bean
+    // this configuration setting is needed for enabling H2 in SpringSecurity
+    // https://stackoverflow.com/questions/43794721/spring-boot-h2-console-throws-403-with-spring-security-1-5-2
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/h2-console/**");
+    }
+
+    /*    @Bean
     public PasswordEncoder getPasswordEncoder(){
        //return NoOpPasswordEncoder.getInstance();
        return new BCryptPasswordEncoder();

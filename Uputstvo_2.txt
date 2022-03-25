@@ -736,3 +736,45 @@ nista specijano nismo pisali, samo nam je rekao da do Srede-Cetvrtka zaokruzimo 
 22.03.2022.
 ---------------------------------------------------
 
+Utility klase
+
+Spring - preferira injekciju definisanu u konstruktoru
+
+---------------------------------------------------
+23.03.2022.
+---------------------------------------------------
+
+Nebojsa Kurilj - FTN zadnja godina
+
+- radio u Schneider Electric
+
+
+Ovako moze da se odradi properti u DTO klasi :
+
+@JsonProperty("user")
+private String userName;
+
+INTERNAL SERVER ERROR - Null Pointer Exception -> najozoglaseniji
+
+kada komentare stavljamo, stavljamo ih na nivo interfejsa
+
+kod servisa su pogotovo bitni komentari -> servisni nivo bi trebao da bude izkomentarisan
+
+ovako moze da bude komentar u CategoryService :
+
+@param category not null, validated input object
+@return newly created category
+CategoryModel saveCategory(CategoryModel category);
+
+CTRL + Q = nam daje u kontroleru kada pritisnemo saveCategory() metod InteliJ IDEA ce nam pokazati tu dokumentaciju
+
+---------------------------------------------------
+24.03.2022.
+---------------------------------------------------
+
+Role Based Access controll
+
+sutra cemo pricati kako generisati Swagger dokumentaciju za nas API
+
+POSTMAN - je REST API klijent
+
